@@ -1,0 +1,340 @@
+dates:
+- '240311'
+- '240318'
+parsed_dates:
+- '240311'
+- '240318'
+Adam Olsson:
+  draw_counter: 0
+  matches_lost_against:
+    Jerry  Lasota: 1
+    Jesper Stålbrandt: 1
+  matches_won_against: {}
+  rating: 1468.7023986633528
+Alex Åkebrand:
+  draw_counter: 0
+  matches_lost_against:
+    Ivar Sandblom: 1
+  matches_won_against:
+    Alexiz  Karlsson: 1
+    Johan Tegerup: 1
+    Marcus Linder: 1
+  rating: 1532.7970476295784
+Alexander Johansson:
+  draw_counter: 0
+  matches_lost_against:
+    Ivar Sandblom: 1
+  matches_won_against:
+    Charlie  Wanthatham: 1
+    Filippo Allegri: 1
+    Mathias Lyngarth: 1
+  rating: 1528.6646446200907
+Alexiz  Karlsson:
+  draw_counter: 0
+  matches_lost_against:
+    Alex Åkebrand: 1
+    Karl  Soderlund: 1
+  matches_won_against: {}
+  rating: 1468.76766923649
+Andreas Cermak:
+  draw_counter: 1
+  matches_lost_against:
+    Rasmus  Bardh: 1
+    Will Wadbrant: 1
+  matches_won_against:
+    Karl  Soderlund: 1
+    Kim Hildeqvist: 1
+    Markus Himmelstrand: 1
+    Philip Olausson: 1
+    Pontus Sandberg: 1
+  rating: 1538.14589500797
+Carl Ringdahl:
+  draw_counter: 0
+  matches_lost_against:
+    Johan Nilsson: 1
+    Marcus Linder: 1
+    Mathias Lyngarth: 1
+  matches_won_against:
+    Robin Mossberg: 1
+  rating: 1471.2271269224625
+Charlie  Wanthatham:
+  draw_counter: 0
+  matches_lost_against:
+    Alexander Johansson: 1
+    Karl  Soderlund: 1
+    Marcus Linder: 1
+    Pontus Sandberg: 1
+    Rasmus Enegren: 1
+    Robin Mossberg: 1
+    Shizheng Lin: 1
+  matches_won_against:
+    Mikael Hedström: 1
+  rating: 1411.8632084247245
+David Lövefors:
+  draw_counter: 0
+  matches_lost_against:
+    Marcus Linder: 1
+  matches_won_against:
+    Jerry  Lasota: 1
+    Karl  Soderlund: 1
+    Mathias Lyngarth: 1
+  rating: 1531.2651211233024
+Elis Holmström:
+  draw_counter: 0
+  matches_lost_against:
+    Johan Nilsson: 1
+    Odin Mamo Haraldson: 1
+  matches_won_against: {}
+  rating: 1468.7023986633528
+Felix Johansson:
+  draw_counter: 1
+  matches_lost_against:
+    Markus Himmelstrand: 1
+  matches_won_against:
+    Ludvig Cederblad: 1
+    Robin Mossberg: 1
+  rating: 1513.923945585581
+Filippo Allegri:
+  draw_counter: 1
+  matches_lost_against:
+    Alexander Johansson: 1
+    Ludvig Cederblad: 1
+  matches_won_against:
+    Jesper Stålbrandt: 1
+  rating: 1482.8178004058261
+Ivar Sandblom:
+  draw_counter: 0
+  matches_lost_against:
+    Vidar Hesselman: 1
+  matches_won_against:
+    Alex Åkebrand: 1
+    Alexander Johansson: 1
+    Shizheng Lin: 1
+  rating: 1529.2376499058157
+Jerry  Lasota:
+  draw_counter: 0
+  matches_lost_against:
+    David Lövefors: 1
+    Robin Mossberg: 1
+    Will Wadbrant: 1
+  matches_won_against:
+    Adam Olsson: 1
+  rating: 1467.969146438226
+Jesper Stålbrandt:
+  draw_counter: 0
+  matches_lost_against:
+    Filippo Allegri: 1
+    Mikael Hedström: 1
+    Rasmus  Bardh: 1
+    Vidar Hesselman: 1
+  matches_won_against:
+    Adam Olsson: 1
+    Karl  Soderlund: 1
+    Philip Olausson: 1
+    Robin Mossberg: 1
+  rating: 1497.4985177879
+Johan Nilsson:
+  draw_counter: 0
+  matches_lost_against:
+    Johan Tegerup: 1
+  matches_won_against:
+    Carl Ringdahl: 1
+    Elis Holmström: 1
+    Julio  Sestelo Chafino: 1
+  rating: 1531.7920760936015
+Johan Tegerup:
+  draw_counter: 0
+  matches_lost_against:
+    Alex Åkebrand: 1
+    Markus Himmelstrand: 1
+  matches_won_against:
+    Johan Nilsson: 1
+    Odin Mamo Haraldson: 1
+  rating: 1497.636312727664
+Julio  Sestelo Chafino:
+  draw_counter: 0
+  matches_lost_against:
+    Johan Nilsson: 1
+    Markus Himmelstrand: 1
+  matches_won_against:
+    Mathias Lyngarth: 1
+    Philip Olausson: 1
+  rating: 1495.0408533492068
+Karl  Soderlund:
+  draw_counter: 0
+  matches_lost_against:
+    Andreas Cermak: 1
+    David Lövefors: 1
+    Jesper Stålbrandt: 1
+    Mathias Lyngarth: 1
+  matches_won_against:
+    Alexiz  Karlsson: 1
+    Charlie  Wanthatham: 1
+    Pontus Sandberg: 1
+  rating: 1487.2135746376957
+Kim Hildeqvist:
+  draw_counter: 0
+  matches_lost_against:
+    Andreas Cermak: 1
+    Rasmus Enegren: 1
+  matches_won_against:
+    Markus Himmelstrand: 1
+    Robin Mossberg: 1
+  rating: 1500.6143387876634
+Ludvig Cederblad:
+  draw_counter: 0
+  matches_lost_against:
+    Felix Johansson: 1
+    Tiantong Li: 1
+  matches_won_against:
+    Filippo Allegri: 1
+    Philip Olausson: 1
+  rating: 1499.35021112454
+Marcus Linder:
+  draw_counter: 0
+  matches_lost_against:
+    Alex Åkebrand: 1
+  matches_won_against:
+    Carl Ringdahl: 1
+    Charlie  Wanthatham: 1
+    David Lövefors: 1
+    Mathias Lyngarth: 1
+    Odin Mamo Haraldson: 1
+    Rasmus Enegren: 1
+    Tiantong Li: 1
+  rating: 1582.0012248643504
+Markus Himmelstrand:
+  draw_counter: 1
+  matches_lost_against:
+    Andreas Cermak: 1
+    Kim Hildeqvist: 1
+    Philip Olausson: 1
+  matches_won_against:
+    Felix Johansson: 1
+    Johan Tegerup: 1
+    Julio  Sestelo Chafino: 1
+  rating: 1509.399274202697
+Mathias Lyngarth:
+  draw_counter: 0
+  matches_lost_against:
+    Alexander Johansson: 1
+    David Lövefors: 1
+    Julio  Sestelo Chafino: 1
+    Marcus Linder: 1
+  matches_won_against:
+    Carl Ringdahl: 1
+    Karl  Soderlund: 1
+    Philip Olausson: 1
+  rating: 1486.201319259832
+Mikael Hedström:
+  draw_counter: 0
+  matches_lost_against:
+    Charlie  Wanthatham: 1
+    Will Wadbrant: 1
+  matches_won_against:
+    Jesper Stålbrandt: 1
+    Pontus Sandberg: 1
+  rating: 1499.8490138910124
+Odin Mamo Haraldson:
+  draw_counter: 0
+  matches_lost_against:
+    Johan Tegerup: 1
+    Marcus Linder: 1
+  matches_won_against:
+    Elis Holmström: 1
+    Pontus Sandberg: 1
+  rating: 1499.2693107201817
+Philip Olausson:
+  draw_counter: 0
+  matches_lost_against:
+    Andreas Cermak: 1
+    Jesper Stålbrandt: 1
+    Julio  Sestelo Chafino: 1
+    Ludvig Cederblad: 1
+    Mathias Lyngarth: 1
+    Will Wadbrant: 1
+  matches_won_against:
+    Markus Himmelstrand: 1
+    Shizheng Lin: 1
+  rating: 1441.8703053381896
+Pontus Sandberg:
+  draw_counter: 0
+  matches_lost_against:
+    Andreas Cermak: 1
+    Karl  Soderlund: 1
+    Mikael Hedström: 1
+    Odin Mamo Haraldson: 1
+    Rasmus Enegren: 1
+    Will Wadbrant: 1
+  matches_won_against:
+    Charlie  Wanthatham: 1
+  rating: 1428.903593983396
+Rasmus  Bardh:
+  draw_counter: 0
+  matches_lost_against: {}
+  matches_won_against:
+    Andreas Cermak: 1
+    Jesper Stålbrandt: 1
+    Robin Mossberg: 1
+    Will Wadbrant: 1
+  rating: 1561.0931282162007
+Rasmus Enegren:
+  draw_counter: 0
+  matches_lost_against:
+    Marcus Linder: 1
+  matches_won_against:
+    Charlie  Wanthatham: 1
+    Kim Hildeqvist: 1
+    Pontus Sandberg: 1
+  rating: 1529.8909054959174
+Robin Mossberg:
+  draw_counter: 0
+  matches_lost_against:
+    Carl Ringdahl: 1
+    Felix Johansson: 1
+    Jesper Stålbrandt: 1
+    Kim Hildeqvist: 1
+    Rasmus  Bardh: 1
+  matches_won_against:
+    Charlie  Wanthatham: 1
+    Jerry  Lasota: 1
+    Will Wadbrant: 1
+  rating: 1467.0052492123878
+Shizheng Lin:
+  draw_counter: 0
+  matches_lost_against:
+    Ivar Sandblom: 1
+    Philip Olausson: 1
+  matches_won_against:
+    Charlie  Wanthatham: 1
+  rating: 1480.7661472969291
+Tiantong Li:
+  draw_counter: 0
+  matches_lost_against:
+    Marcus Linder: 1
+    Vidar Hesselman: 1
+  matches_won_against:
+    Ludvig Cederblad: 1
+    Will Wadbrant: 1
+  rating: 1500.9845206727457
+Vidar Hesselman:
+  draw_counter: 0
+  matches_lost_against: {}
+  matches_won_against:
+    Ivar Sandblom: 1
+    Jesper Stålbrandt: 1
+    Tiantong Li: 1
+  rating: 1548.3713440532874
+Will Wadbrant:
+  draw_counter: 0
+  matches_lost_against:
+    Rasmus  Bardh: 1
+    Robin Mossberg: 1
+    Tiantong Li: 1
+  matches_won_against:
+    Andreas Cermak: 1
+    Jerry  Lasota: 1
+    Mikael Hedström: 1
+    Philip Olausson: 1
+    Pontus Sandberg: 1
+  rating: 1530.4122166966492
