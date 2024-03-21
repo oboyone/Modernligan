@@ -301,7 +301,7 @@ def calculate_leaderboards(player_data_dict):
     def modern_ligan_points(list_of_events):
         points_list = []
         for event in list_of_events:
-            points = event.get('wins') * 3 + event.get('draws') * 1
+            points = event.get('wins') * 3 + event.get('draws') * 1 + event.get('byes') * 3
             points_list.append(points)
         points_list = sorted(points_list, reverse=True)
         if len(points_list) > 8:
