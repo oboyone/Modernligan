@@ -3,10 +3,14 @@ Adam Olsson:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 0
       losses: 2
       wins: 0
   draw_counter: 0
   elo_rating: 1468.7023986633528
+  game_win_rate: 0.0
+  match_win_rate: 0.0
   matches_lost_against:
     Jerry Lasota: 1
     Jesper Stålbrandt: 1
@@ -17,10 +21,14 @@ Alex Åkebrand:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 6
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1532.7970476295784
+  game_win_rate: 60.0
+  match_win_rate: 75.0
   matches_lost_against:
     Ivar Sandblom: 1
   matches_won_against:
@@ -33,10 +41,14 @@ Alexander Johansson:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 2
+      games_won: 7
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1528.6646446200907
+  game_win_rate: 77.77777777777779
+  match_win_rate: 75.0
   matches_lost_against:
     Ivar Sandblom: 1
   matches_won_against:
@@ -49,10 +61,14 @@ Alexiz Karlsson:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 1
       losses: 2
       wins: 0
   draw_counter: 0
   elo_rating: 1468.76766923649
+  game_win_rate: 20.0
+  match_win_rate: 0.0
   matches_lost_against:
     Alex Åkebrand: 1
     Karl Soderlund: 1
@@ -63,15 +79,21 @@ Andreas Cermak:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 6
       losses: 1
       wins: 3
     '240318':
       byes: 0
       draws: 1
+      games_lost: 4
+      games_won: 6
       losses: 1
       wins: 2
   draw_counter: 1
   elo_rating: 1538.14589500797
+  game_win_rate: 60.0
+  match_win_rate: 71.42857142857143
   matches_lost_against:
     Rasmus Bardh: 1
     Will Wadbrant: 1
@@ -87,10 +109,14 @@ Carl Ringdahl:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 4
       losses: 3
       wins: 1
   draw_counter: 0
   elo_rating: 1471.2271269224625
+  game_win_rate: 40.0
+  match_win_rate: 25.0
   matches_lost_against:
     Johan Nilsson: 1
     Marcus Linder: 1
@@ -103,15 +129,21 @@ Charlie Wanthatham:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 7
+      games_won: 2
       losses: 3
       wins: 1
     '240318':
       byes: 0
       draws: 0
+      games_lost: 8
+      games_won: 0
       losses: 4
       wins: 0
   draw_counter: 0
   elo_rating: 1411.8632084247245
+  game_win_rate: 11.76470588235294
+  match_win_rate: 12.5
   matches_lost_against:
     Alexander Johansson: 1
     Karl Soderlund: 1
@@ -128,10 +160,14 @@ David Lövefors:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 3
+      games_won: 7
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1531.2651211233024
+  game_win_rate: 70.0
+  match_win_rate: 75.0
   matches_lost_against:
     Marcus Linder: 1
   matches_won_against:
@@ -144,10 +180,14 @@ Elis Holmström:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 1
       losses: 2
       wins: 0
   draw_counter: 0
   elo_rating: 1468.7023986633528
+  game_win_rate: 20.0
+  match_win_rate: 0.0
   matches_lost_against:
     Johan Nilsson: 1
     Odin Mamo Haraldson: 1
@@ -158,10 +198,14 @@ Felix Johansson:
     '240318':
       byes: 0
       draws: 1
+      games_lost: 4
+      games_won: 5
       losses: 1
       wins: 2
   draw_counter: 1
   elo_rating: 1513.923945585581
+  game_win_rate: 55.55555555555556
+  match_win_rate: 66.66666666666666
   matches_lost_against:
     Markus Himmelstrand: 1
   matches_won_against:
@@ -173,10 +217,14 @@ Filippo Allegri:
     '240318':
       byes: 1
       draws: 1
+      games_lost: 6
+      games_won: 3
       losses: 2
       wins: 1
   draw_counter: 1
   elo_rating: 1482.8178004058261
+  game_win_rate: 33.33333333333333
+  match_win_rate: 33.33333333333333
   matches_lost_against:
     Alexander Johansson: 1
     Ludvig Cederblad: 1
@@ -188,10 +236,14 @@ Ivar Sandblom:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 3
+      games_won: 6
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1529.2376499058157
+  game_win_rate: 66.66666666666666
+  match_win_rate: 75.0
   matches_lost_against:
     Vidar Hesselman: 1
   matches_won_against:
@@ -204,10 +256,14 @@ Jerry Lasota:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 4
       losses: 3
       wins: 1
   draw_counter: 0
   elo_rating: 1467.969146438226
+  game_win_rate: 40.0
+  match_win_rate: 25.0
   matches_lost_against:
     David Lövefors: 1
     Robin Mossberg: 1
@@ -220,15 +276,21 @@ Jesper Stålbrandt:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 4
       losses: 2
       wins: 2
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 6
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1497.4985177879
+  game_win_rate: 52.63157894736842
+  match_win_rate: 50.0
   matches_lost_against:
     Filippo Allegri: 1
     Mikael Hedström: 1
@@ -245,10 +307,14 @@ Johan Nilsson:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 6
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1531.7920760936015
+  game_win_rate: 54.54545454545454
+  match_win_rate: 75.0
   matches_lost_against:
     Johan Tegerup: 1
   matches_won_against:
@@ -261,10 +327,14 @@ Johan Tegerup:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 5
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1497.636312727664
+  game_win_rate: 55.55555555555556
+  match_win_rate: 50.0
   matches_lost_against:
     Alex Åkebrand: 1
     Markus Himmelstrand: 1
@@ -277,10 +347,14 @@ Julio Sestelo Chafino:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 6
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1495.0408533492068
+  game_win_rate: 54.54545454545454
+  match_win_rate: 50.0
   matches_lost_against:
     Johan Nilsson: 1
     Markus Himmelstrand: 1
@@ -293,15 +367,21 @@ Karl Soderlund:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 6
       losses: 2
       wins: 2
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 3
       losses: 2
       wins: 1
   draw_counter: 0
   elo_rating: 1487.2135746376957
+  game_win_rate: 50.0
+  match_win_rate: 42.857142857142854
   matches_lost_against:
     Andreas Cermak: 1
     David Lövefors: 1
@@ -317,10 +397,14 @@ Kim Hildeqvist:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 5
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1500.6143387876634
+  game_win_rate: 45.45454545454545
+  match_win_rate: 50.0
   matches_lost_against:
     Andreas Cermak: 1
     Rasmus Enegren: 1
@@ -333,10 +417,14 @@ Ludvig Cederblad:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 5
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1499.35021112454
+  game_win_rate: 50.0
+  match_win_rate: 50.0
   matches_lost_against:
     Felix Johansson: 1
     Tiantong Li: 1
@@ -349,15 +437,21 @@ Marcus Linder:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 1
+      games_won: 8
       losses: 0
       wins: 4
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 7
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1582.0012248643504
+  game_win_rate: 75.0
+  match_win_rate: 87.5
   matches_lost_against:
     Alex Åkebrand: 1
   matches_won_against:
@@ -374,15 +468,21 @@ Markus Himmelstrand:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 3
       losses: 3
       wins: 0
     '240318':
       byes: 0
       draws: 1
+      games_lost: 3
+      games_won: 7
       losses: 0
       wins: 3
   draw_counter: 1
   elo_rating: 1509.399274202697
+  game_win_rate: 52.63157894736842
+  match_win_rate: 50.0
   matches_lost_against:
     Andreas Cermak: 1
     Kim Hildeqvist: 1
@@ -397,15 +497,21 @@ Mathias Lyngarth:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 4
       losses: 2
       wins: 2
     '240318':
       byes: 1
       draws: 0
+      games_lost: 4
+      games_won: 3
       losses: 2
       wins: 1
   draw_counter: 0
   elo_rating: 1486.201319259832
+  game_win_rate: 43.75
+  match_win_rate: 42.857142857142854
   matches_lost_against:
     Alexander Johansson: 1
     David Lövefors: 1
@@ -421,10 +527,14 @@ Mikael Hedström:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 6
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1499.8490138910124
+  game_win_rate: 60.0
+  match_win_rate: 50.0
   matches_lost_against:
     Charlie Wanthatham: 1
     Will Wadbrant: 1
@@ -437,10 +547,14 @@ Odin Mamo Haraldson:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 4
+      games_won: 5
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1499.2693107201817
+  game_win_rate: 55.55555555555556
+  match_win_rate: 50.0
   matches_lost_against:
     Johan Tegerup: 1
     Marcus Linder: 1
@@ -453,15 +567,21 @@ Philip Olausson:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 7
+      games_won: 3
       losses: 3
       wins: 1
     '240318':
       byes: 0
       draws: 0
+      games_lost: 7
+      games_won: 4
       losses: 3
       wins: 1
   draw_counter: 0
   elo_rating: 1441.8703053381896
+  game_win_rate: 33.33333333333333
+  match_win_rate: 25.0
   matches_lost_against:
     Andreas Cermak: 1
     Jesper Stålbrandt: 1
@@ -478,15 +598,21 @@ Pontus Sandberg:
     '240311':
       byes: 1
       draws: 0
+      games_lost: 6
+      games_won: 2
       losses: 3
       wins: 0
     '240318':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 3
       losses: 3
       wins: 1
   draw_counter: 0
   elo_rating: 1428.903593983396
+  game_win_rate: 29.411764705882355
+  match_win_rate: 14.285714285714285
   matches_lost_against:
     Andreas Cermak: 1
     Karl Soderlund: 1
@@ -502,10 +628,14 @@ Rasmus Bardh:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 1
+      games_won: 8
       losses: 0
       wins: 4
   draw_counter: 0
   elo_rating: 1561.0931282162007
+  game_win_rate: 88.88888888888889
+  match_win_rate: 100.0
   matches_lost_against: {}
   matches_won_against:
     Andreas Cermak: 1
@@ -518,10 +648,14 @@ Rasmus Enegren:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 3
+      games_won: 6
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1529.8909054959174
+  game_win_rate: 66.66666666666666
+  match_win_rate: 75.0
   matches_lost_against:
     Marcus Linder: 1
   matches_won_against:
@@ -534,15 +668,21 @@ Robin Mossberg:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 6
       losses: 2
       wins: 2
     '240318':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 3
       losses: 3
       wins: 1
   draw_counter: 0
   elo_rating: 1467.0052492123878
+  game_win_rate: 42.857142857142854
+  match_win_rate: 37.5
   matches_lost_against:
     Carl Ringdahl: 1
     Felix Johansson: 1
@@ -559,10 +699,14 @@ Shizheng Lin:
     '240318':
       byes: 1
       draws: 0
+      games_lost: 4
+      games_won: 3
       losses: 2
       wins: 1
   draw_counter: 0
   elo_rating: 1480.7661472969291
+  game_win_rate: 42.857142857142854
+  match_win_rate: 33.33333333333333
   matches_lost_against:
     Ivar Sandblom: 1
     Philip Olausson: 1
@@ -574,10 +718,14 @@ Tiantong Li:
     '240318':
       byes: 0
       draws: 0
+      games_lost: 5
+      games_won: 4
       losses: 2
       wins: 2
   draw_counter: 0
   elo_rating: 1500.9845206727457
+  game_win_rate: 44.44444444444444
+  match_win_rate: 50.0
   matches_lost_against:
     Marcus Linder: 1
     Vidar Hesselman: 1
@@ -590,10 +738,14 @@ Vidar Hesselman:
     '240318':
       byes: 1
       draws: 0
+      games_lost: 1
+      games_won: 6
       losses: 0
       wins: 3
   draw_counter: 0
   elo_rating: 1548.3713440532874
+  game_win_rate: 85.71428571428571
+  match_win_rate: 100.0
   matches_lost_against: {}
   matches_won_against:
     Ivar Sandblom: 1
@@ -605,15 +757,21 @@ Will Wadbrant:
     '240311':
       byes: 0
       draws: 0
+      games_lost: 6
+      games_won: 5
       losses: 2
       wins: 2
     '240318':
       byes: 1
       draws: 0
+      games_lost: 5
+      games_won: 6
       losses: 1
       wins: 3
   draw_counter: 0
   elo_rating: 1530.4122166966492
+  game_win_rate: 50.0
+  match_win_rate: 62.5
   matches_lost_against:
     Rasmus Bardh: 1
     Robin Mossberg: 1
