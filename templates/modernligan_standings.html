@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Modernligan Standings {% endblock %}
+
+{% block content %}
+    <p class="text-center text-muted" style="padding-top: 10px; padding-bottom: 10px"> Currently the standings for Modernligan are not correct as they are based on data obtained from 240311 only.</p>
+    <div><div class="row justify-content-center mb-3 mt-3">
+        <div class="col-md-6">
+            <h2 class="text-center display-4" style="padding-top: 10px; padding-bottom: 10px">Modernligan Standings</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center text-muted">Player</th>
+                        <th class="text-center text-muted">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in leaderboard_data['Modern Ligan Leaderboard'] %}
+                        {% for name, points in player.items() %}
+                            <tr>
+                                <td class="text-center text-muted">{{ name }}</td>
+                                <td class="text-center text-muted">{{ points }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
