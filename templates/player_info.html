@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center display-4">{{ player_name }}</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-center text-muted">Elo Rating: {{ '%0.2f' % player_info.get('elo_rating') | float }}</h4 class="text-center text-muted">
+                                <h4 class="text-center text-muted">Amount of Draws: {{ player_info.get('draw_counter') }}</h4 class="text-center text-muted">
+                                <h4 class="text-center text-muted">Game Win Rate: {{ '%0.2f' % player_info.get('game_win_rate') | float }}%</h4 class="text-center text-muted">
+                                <h4 class="text-center text-muted">Match Win Rate: {{ '%0.2f' % player_info.get('match_win_rate') | float }}%</h4 class="text-center text-muted">
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-center text-muted">Matches Won Against:</h4 class="text-center text-muted">
+                                <ul class="text-muted text-center list_unstyled list-inline">
+                                    {% for opponent, count in player_info.get('matches_won_against', {}).items() %}
+                                        <li><strong>{{ opponent }}</strong>: {{ count }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <h4 class="text-center text-muted">Matches Lost Against:</h4 class="text-center text-muted">
+                                <ul class="text-muted text-center list_unstyled list-inline">
+                                    {% for opponent, count in player_info.get('matches_lost_against', {}).items() %}
+                                        <li><strong>{{ opponent }}</strong>: {{ count }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <h4 class="text-center text-muted">Undefeated Records: {{ player_info.get('undefeated_records') }}</h4 class="text-center text-muted">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a class="btn btn-secondary form-control" type="button" href="/player_stats">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
