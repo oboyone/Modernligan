@@ -6,28 +6,6 @@
 <div class="container" style="padding-top: 20px; padding-bottom: 20px">
     <div class="row">
         <div class="col-md-6">
-            <h5 class="text-center display-4">Most Draws</h5>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center text-muted">Player</th>
-                        <th class="text-center text-muted">Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for player in leaderboard_data['Draw Leaderboard'] %}
-                        {% for name, score in player.items() %}
-                            <tr>
-                                <td class="text-center text-muted">{{ name }}</td>
-                                <td class="text-center text-muted">{{ score }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="col-md-6">
             <h5 class="text-center display-4">Current Elo</h5>
             <table class="table">
                 <thead>
@@ -48,33 +26,9 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <h5 class="text-center display-4">Most Byes</h5>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center text-muted">Player</th>
-                        <th class="text-center text-muted">Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for player in leaderboard_data['Bye Leaderboard'] %}
-                        {% for name, score in player.items() %}
-                            <tr>
-                                <td class="text-center text-muted">{{ name }}</td>
-                                <td class="text-center text-muted">{{ score }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
 
         <div class="col-md-6">
-            <h5 class="text-center display-4">Match Win Percentage</h5>
+            <h5 class="text-center display-4 text-nowrap">Match Win Percentage</h5>
             <table class="table">
                 <thead>
                     <tr>
@@ -94,9 +48,11 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 
     <div class="row">
+
         <div class="col-md-6">
             <h5 class="text-center display-4">Game Win Percentage</h5>
             <table class="table">
@@ -130,6 +86,51 @@
                 </thead>
                 <tbody>
                     {% for player in leaderboard_data['Most Played Events Leaderboard'] %}
+                        {% for name, score in player.items() %}
+                            <tr>
+                                <td class="text-center text-muted">{{ name }}</td>
+                                <td class="text-center text-muted">{{ score }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5 class="text-center display-4">Most Draws</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center text-muted">Player</th>
+                        <th class="text-center text-muted">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in leaderboard_data['Draw Leaderboard'] %}
+                        {% for name, score in player.items() %}
+                            <tr>
+                                <td class="text-center text-muted">{{ name }}</td>
+                                <td class="text-center text-muted">{{ score }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-center display-4">Most Byes</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center text-muted">Player</th>
+                        <th class="text-center text-muted">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in leaderboard_data['Bye Leaderboard'] %}
                         {% for name, score in player.items() %}
                             <tr>
                                 <td class="text-center text-muted">{{ name }}</td>
