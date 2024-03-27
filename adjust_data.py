@@ -1,6 +1,8 @@
 import yaml 
 import csv
-
+"""
+Small script to update current league leaderboard so that it is correct. This will only be needed for this league season
+"""
 player_data_dict = {}
 
 # Load data from CSV file into player_data_dict
