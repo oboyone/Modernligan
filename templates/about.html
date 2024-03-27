@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="display-4" style="padding-top: 10px; padding-bottom: 10px">{% block title %} About {% endblock %}</h1>
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px">This page is maintained by Alexander Johansson with support from a number of persons within the Stockholm Modern Community. The aim for the project is to create a high quality statistics database for Modernligan.
+
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px">You can find the project on GitHub: <a href="https://github.com/oboyone/Modernligan">https://github.com/oboyone/Modernligan</a> if you are interested or if you want to contribute</p>
+
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px">The webbapp is written in Python and uses Flask with the bootstrap CSS framework. If you have any questions, please contact the maintainer at: <a href="mailto:{{ maintainer_email }}">{{ maintainer_email }}</a>
+    </p>
+    <p><a href="{{ url_for('index') }}">Go back</a></p>
+{% endblock %}
