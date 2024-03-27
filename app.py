@@ -43,9 +43,15 @@ def player(player_name):
         return render_template('player_info.html', player_info=player_info, player_name=player_name)
     else:
         return "Player not found."
+
+@app.route('/player_stats/opt_out')   
+def opt_out():
+    return render_template('opt_out.html')
+ 
+
 def create_app():
     return app
 
 if __name__ == "__main__":
     from waitress import serve
-    serve(app, host="0.0.0.0", port=9000)
+    serve(app, host="127.0.0.1", port=9000)
