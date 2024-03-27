@@ -9,12 +9,14 @@ Adam Olsson:
       wins: 0
   draw_counter: 0
   elo_rating: 1468.7023986633528
+  events_played: 17
   game_win_rate: 0.0
   match_win_rate: 0.0
   matches_lost_against:
     Jerry Lasota: 1
     Jesper Stålbrandt: 1
   matches_won_against: {}
+  modernligan_points: '20'
   undefeated_records: 0
 Alex Åkebrand:
   dates_played:
@@ -27,6 +29,7 @@ Alex Åkebrand:
       wins: 3
   draw_counter: 0
   elo_rating: 1532.7970476295784
+  events_played: 21
   game_win_rate: 60.0
   match_win_rate: 75.0
   matches_lost_against:
@@ -35,6 +38,7 @@ Alex Åkebrand:
     Alexiz Karlsson: 1
     Johan Tegerup: 1
     Marcus Linder: 1
+  modernligan_points: '21'
   undefeated_records: 0
 Alexander Johansson:
   dates_played:
@@ -45,16 +49,29 @@ Alexander Johansson:
       games_won: 7
       losses: 1
       wins: 3
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 7
+      games_won: 5
+      losses: 3
+      wins: 1
   draw_counter: 0
-  elo_rating: 1528.6646446200907
-  game_win_rate: 77.77777777777779
-  match_win_rate: 75.0
+  elo_rating: 1494.1629951229531
+  events_played: 50
+  game_win_rate: 57.14285714285714
+  match_win_rate: 50.0
   matches_lost_against:
+    Filippo Allegri: 1
     Ivar Sandblom: 1
+    Mathias Lyngarth: 1
+    Will Wadbrant: 1
   matches_won_against:
     Charlie Wanthatham: 1
     Filippo Allegri: 1
     Mathias Lyngarth: 1
+    Odin Mamo Haraldson: 1
+  modernligan_points: '66'
   undefeated_records: 0
 Alexiz Karlsson:
   dates_played:
@@ -65,14 +82,27 @@ Alexiz Karlsson:
       games_won: 1
       losses: 2
       wins: 0
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 5
+      games_won: 5
+      losses: 2
+      wins: 2
   draw_counter: 0
-  elo_rating: 1468.76766923649
-  game_win_rate: 20.0
-  match_win_rate: 0.0
+  elo_rating: 1474.3525579885843
+  events_played: 46
+  game_win_rate: 40.0
+  match_win_rate: 33.33333333333333
   matches_lost_against:
     Alex Åkebrand: 1
     Karl Soderlund: 1
-  matches_won_against: {}
+    Vidar Hesselman: 1
+    Will Wadbrant: 1
+  matches_won_against:
+    David Lövefors: 1
+    Pontus Sandberg: 1
+  modernligan_points: '41'
   undefeated_records: 0
 Andreas Cermak:
   dates_played:
@@ -90,12 +120,22 @@ Andreas Cermak:
       games_won: 6
       losses: 1
       wins: 2
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 4
+      games_won: 1
+      losses: 2
+      wins: 0
   draw_counter: 1
-  elo_rating: 1538.14589500797
-  game_win_rate: 60.0
-  match_win_rate: 71.42857142857143
+  elo_rating: 1502.74594632308
+  events_played: 34
+  game_win_rate: 52.0
+  match_win_rate: 55.55555555555556
   matches_lost_against:
+    Maxim Meyler: 1
     Rasmus Bardh: 1
+    Robin Svensk: 1
     Will Wadbrant: 1
   matches_won_against:
     Karl Soderlund: 1
@@ -103,6 +143,7 @@ Andreas Cermak:
     Markus Himmelstrand: 1
     Philip Olausson: 1
     Pontus Sandberg: 1
+  modernligan_points: '40'
   undefeated_records: 0
 Carl Ringdahl:
   dates_played:
@@ -115,6 +156,7 @@ Carl Ringdahl:
       wins: 1
   draw_counter: 0
   elo_rating: 1471.2271269224625
+  events_played: 0
   game_win_rate: 40.0
   match_win_rate: 25.0
   matches_lost_against:
@@ -123,6 +165,7 @@ Carl Ringdahl:
     Mathias Lyngarth: 1
   matches_won_against:
     Robin Mossberg: 1
+  modernligan_points: '3'
   undefeated_records: 0
 Charlie Wanthatham:
   dates_played:
@@ -140,20 +183,32 @@ Charlie Wanthatham:
       games_won: 0
       losses: 4
       wins: 0
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 7
+      games_won: 3
+      losses: 3
+      wins: 1
   draw_counter: 0
-  elo_rating: 1411.8632084247245
-  game_win_rate: 11.76470588235294
-  match_win_rate: 12.5
+  elo_rating: 1395.4851320049615
+  events_played: 41
+  game_win_rate: 18.51851851851852
+  match_win_rate: 16.666666666666664
   matches_lost_against:
     Alexander Johansson: 1
-    Karl Soderlund: 1
+    Julio Sestelo Chafino: 1
+    Karl Soderlund: 2
     Marcus Linder: 1
+    Maxim Meyler: 1
     Pontus Sandberg: 1
     Rasmus Enegren: 1
     Robin Mossberg: 1
     Shizheng Lin: 1
   matches_won_against:
     Mikael Hedström: 1
+    Odin Mamo Haraldson: 1
+  modernligan_points: '27'
   undefeated_records: 0
 David Lövefors:
   dates_played:
@@ -164,16 +219,27 @@ David Lövefors:
       games_won: 7
       losses: 1
       wins: 3
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 4
+      games_won: 0
+      losses: 2
+      wins: 0
   draw_counter: 0
-  elo_rating: 1531.2651211233024
-  game_win_rate: 70.0
-  match_win_rate: 75.0
+  elo_rating: 1499.429630041293
+  events_played: 56
+  game_win_rate: 50.0
+  match_win_rate: 50.0
   matches_lost_against:
+    Alexiz Karlsson: 1
     Marcus Linder: 1
+    Rasmus Bardh: 1
   matches_won_against:
     Jerry Lasota: 1
     Karl Soderlund: 1
     Mathias Lyngarth: 1
+  modernligan_points: '55'
   undefeated_records: 0
 Elis Holmström:
   dates_played:
@@ -184,14 +250,25 @@ Elis Holmström:
       games_won: 1
       losses: 2
       wins: 0
-  draw_counter: 0
-  elo_rating: 1468.7023986633528
-  game_win_rate: 20.0
+    '240325':
+      byes: 0
+      draws: 1
+      games_lost: 5
+      games_won: 1
+      losses: 2
+      wins: 0
+  draw_counter: 1
+  elo_rating: 1445.659020758385
+  events_played: 18
+  game_win_rate: 18.181818181818183
   match_win_rate: 0.0
   matches_lost_against:
     Johan Nilsson: 1
+    Julio Sestelo Chafino: 1
     Odin Mamo Haraldson: 1
+    Vidar Hesselman: 1
   matches_won_against: {}
+  modernligan_points: '21'
   undefeated_records: 0
 Felix Johansson:
   dates_played:
@@ -202,15 +279,27 @@ Felix Johansson:
       games_won: 5
       losses: 1
       wins: 2
-  draw_counter: 1
-  elo_rating: 1513.923945585581
-  game_win_rate: 55.55555555555556
-  match_win_rate: 66.66666666666666
+    '240325':
+      byes: 1
+      draws: 1
+      games_lost: 6
+      games_won: 5
+      losses: 2
+      wins: 1
+  draw_counter: 2
+  elo_rating: 1492.8005331224515
+  events_played: 37
+  game_win_rate: 50.0
+  match_win_rate: 50.0
   matches_lost_against:
     Markus Himmelstrand: 1
+    Pontus Sandberg: 1
+    Will Wadbrant: 1
   matches_won_against:
+    Julian Petsonk: 1
     Ludvig Cederblad: 1
     Robin Mossberg: 1
+  modernligan_points: '17'
   undefeated_records: 0
 Filippo Allegri:
   dates_played:
@@ -221,15 +310,28 @@ Filippo Allegri:
       games_won: 3
       losses: 2
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 6
+      losses: 2
+      wins: 2
   draw_counter: 1
-  elo_rating: 1482.8178004058261
-  game_win_rate: 33.33333333333333
-  match_win_rate: 33.33333333333333
+  elo_rating: 1488.686878643246
+  events_played: 30
+  game_win_rate: 42.857142857142854
+  match_win_rate: 42.857142857142854
   matches_lost_against:
     Alexander Johansson: 1
     Ludvig Cederblad: 1
+    Markus Himmelstrand: 1
+    Rasmus Bardh: 1
   matches_won_against:
+    Alexander Johansson: 1
+    Jerry Lasota: 1
     Jesper Stålbrandt: 1
+  modernligan_points: '19'
   undefeated_records: 0
 Ivar Sandblom:
   dates_played:
@@ -242,6 +344,7 @@ Ivar Sandblom:
       wins: 3
   draw_counter: 0
   elo_rating: 1529.2376499058157
+  events_played: 26
   game_win_rate: 66.66666666666666
   match_win_rate: 75.0
   matches_lost_against:
@@ -250,6 +353,7 @@ Ivar Sandblom:
     Alex Åkebrand: 1
     Alexander Johansson: 1
     Shizheng Lin: 1
+  modernligan_points: '24'
   undefeated_records: 0
 Jerry Lasota:
   dates_played:
@@ -260,16 +364,29 @@ Jerry Lasota:
       games_won: 4
       losses: 3
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 5
+      losses: 2
+      wins: 2
   draw_counter: 0
-  elo_rating: 1467.969146438226
-  game_win_rate: 40.0
-  match_win_rate: 25.0
+  elo_rating: 1470.2612196765815
+  events_played: 22
+  game_win_rate: 42.857142857142854
+  match_win_rate: 37.5
   matches_lost_against:
     David Lövefors: 1
+    Filippo Allegri: 1
+    Maxim Meyler: 1
     Robin Mossberg: 1
     Will Wadbrant: 1
   matches_won_against:
     Adam Olsson: 1
+    Karl Soderlund: 1
+    Shizheng Lin: 1
+  modernligan_points: '30'
   undefeated_records: 0
 Jesper Stålbrandt:
   dates_played:
@@ -289,6 +406,7 @@ Jesper Stålbrandt:
       wins: 2
   draw_counter: 0
   elo_rating: 1497.4985177879
+  events_played: 48
   game_win_rate: 52.63157894736842
   match_win_rate: 50.0
   matches_lost_against:
@@ -301,6 +419,7 @@ Jesper Stålbrandt:
     Karl Soderlund: 1
     Philip Olausson: 1
     Robin Mossberg: 1
+  modernligan_points: '54'
   undefeated_records: 0
 Johan Nilsson:
   dates_played:
@@ -313,6 +432,7 @@ Johan Nilsson:
       wins: 3
   draw_counter: 0
   elo_rating: 1531.7920760936015
+  events_played: 12
   game_win_rate: 54.54545454545454
   match_win_rate: 75.0
   matches_lost_against:
@@ -321,6 +441,7 @@ Johan Nilsson:
     Carl Ringdahl: 1
     Elis Holmström: 1
     Julio Sestelo Chafino: 1
+  modernligan_points: '36'
   undefeated_records: 0
 Johan Tegerup:
   dates_played:
@@ -333,6 +454,7 @@ Johan Tegerup:
       wins: 2
   draw_counter: 0
   elo_rating: 1497.636312727664
+  events_played: 11
   game_win_rate: 55.55555555555556
   match_win_rate: 50.0
   matches_lost_against:
@@ -341,6 +463,50 @@ Johan Tegerup:
   matches_won_against:
     Johan Nilsson: 1
     Odin Mamo Haraldson: 1
+  modernligan_points: '15'
+  undefeated_records: 0
+Joshua Petsonk:
+  dates_played:
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 1
+      games_won: 8
+      losses: 0
+      wins: 4
+  draw_counter: 0
+  elo_rating: 1562.057510309492
+  events_played: 6
+  game_win_rate: 88.88888888888889
+  match_win_rate: 100.0
+  matches_lost_against: {}
+  matches_won_against:
+    Karl Soderlund: 1
+    Markus Himmelstrand: 1
+    Maxim Meyler: 1
+    Odin Mamo Haraldson: 1
+  modernligan_points: '24'
+  undefeated_records: 1
+Julian Petsonk:
+  dates_played:
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 1
+      losses: 3
+      wins: 0
+  draw_counter: 0
+  elo_rating: 1450.918576648791
+  events_played: 6
+  game_win_rate: 14.285714285714285
+  match_win_rate: 0.0
+  matches_lost_against:
+    Felix Johansson: 1
+    Robin Mossberg: 1
+    Shizheng Lin: 1
+  matches_won_against: {}
+  modernligan_points: '6'
   undefeated_records: 0
 Julio Sestelo Chafino:
   dates_played:
@@ -351,16 +517,29 @@ Julio Sestelo Chafino:
       games_won: 6
       losses: 2
       wins: 2
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 4
+      games_won: 6
+      losses: 2
+      wins: 2
   draw_counter: 0
-  elo_rating: 1495.0408533492068
-  game_win_rate: 54.54545454545454
+  elo_rating: 1491.343500794847
+  events_played: 39
+  game_win_rate: 57.14285714285714
   match_win_rate: 50.0
   matches_lost_against:
     Johan Nilsson: 1
     Markus Himmelstrand: 1
+    Robin Svensk: 1
+    Timmy Alvelöv: 1
   matches_won_against:
+    Charlie Wanthatham: 1
+    Elis Holmström: 1
     Mathias Lyngarth: 1
     Philip Olausson: 1
+  modernligan_points: '48'
   undefeated_records: 0
 Karl Soderlund:
   dates_played:
@@ -378,19 +557,30 @@ Karl Soderlund:
       games_won: 3
       losses: 2
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 5
+      games_won: 3
+      losses: 2
+      wins: 1
   draw_counter: 0
-  elo_rating: 1487.2135746376957
-  game_win_rate: 50.0
-  match_win_rate: 42.857142857142854
+  elo_rating: 1467.9316064021305
+  events_played: 3
+  game_win_rate: 46.15384615384615
+  match_win_rate: 40.0
   matches_lost_against:
     Andreas Cermak: 1
     David Lövefors: 1
+    Jerry Lasota: 1
     Jesper Stålbrandt: 1
+    Joshua Petsonk: 1
     Mathias Lyngarth: 1
   matches_won_against:
     Alexiz Karlsson: 1
-    Charlie Wanthatham: 1
+    Charlie Wanthatham: 2
     Pontus Sandberg: 1
+  modernligan_points: '25'
   undefeated_records: 0
 Kim Hildeqvist:
   dates_played:
@@ -403,6 +593,7 @@ Kim Hildeqvist:
       wins: 2
   draw_counter: 0
   elo_rating: 1500.6143387876634
+  events_played: 8
   game_win_rate: 45.45454545454545
   match_win_rate: 50.0
   matches_lost_against:
@@ -411,6 +602,7 @@ Kim Hildeqvist:
   matches_won_against:
     Markus Himmelstrand: 1
     Robin Mossberg: 1
+  modernligan_points: '15'
   undefeated_records: 0
 Ludvig Cederblad:
   dates_played:
@@ -423,6 +615,7 @@ Ludvig Cederblad:
       wins: 2
   draw_counter: 0
   elo_rating: 1499.35021112454
+  events_played: 30
   game_win_rate: 50.0
   match_win_rate: 50.0
   matches_lost_against:
@@ -431,6 +624,7 @@ Ludvig Cederblad:
   matches_won_against:
     Filippo Allegri: 1
     Philip Olausson: 1
+  modernligan_points: '64'
   undefeated_records: 0
 Marcus Linder:
   dates_played:
@@ -448,10 +642,18 @@ Marcus Linder:
       games_won: 7
       losses: 1
       wins: 3
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 1
+      games_won: 8
+      losses: 0
+      wins: 4
   draw_counter: 0
-  elo_rating: 1582.0012248643504
-  game_win_rate: 75.0
-  match_win_rate: 87.5
+  elo_rating: 1631.9254632845282
+  events_played: 59
+  game_win_rate: 79.3103448275862
+  match_win_rate: 91.66666666666666
   matches_lost_against:
     Alex Åkebrand: 1
   matches_won_against:
@@ -460,9 +662,14 @@ Marcus Linder:
     David Lövefors: 1
     Mathias Lyngarth: 1
     Odin Mamo Haraldson: 1
+    Rasmus Bardh: 1
     Rasmus Enegren: 1
+    Robin Mossberg: 1
     Tiantong Li: 1
-  undefeated_records: 1
+    Timmy Alvelöv: 1
+    Will Wadbrant: 1
+  modernligan_points: '69'
+  undefeated_records: 2
 Markus Himmelstrand:
   dates_played:
     '240311':
@@ -479,18 +686,31 @@ Markus Himmelstrand:
       games_won: 7
       losses: 0
       wins: 3
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 3
+      games_won: 6
+      losses: 1
+      wins: 3
   draw_counter: 1
-  elo_rating: 1509.399274202697
-  game_win_rate: 52.63157894736842
-  match_win_rate: 50.0
+  elo_rating: 1539.0847113558782
+  events_played: 61
+  game_win_rate: 57.14285714285714
+  match_win_rate: 60.0
   matches_lost_against:
     Andreas Cermak: 1
+    Joshua Petsonk: 1
     Kim Hildeqvist: 1
     Philip Olausson: 1
   matches_won_against:
     Felix Johansson: 1
+    Filippo Allegri: 1
     Johan Tegerup: 1
     Julio Sestelo Chafino: 1
+    Robin Svensk: 1
+    Timmy Alvelöv: 1
+  modernligan_points: '59'
   undefeated_records: 0
 Mathias Lyngarth:
   dates_played:
@@ -508,19 +728,54 @@ Mathias Lyngarth:
       games_won: 3
       losses: 2
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 6
+      losses: 2
+      wins: 2
   draw_counter: 0
-  elo_rating: 1486.201319259832
-  game_win_rate: 43.75
-  match_win_rate: 42.857142857142854
+  elo_rating: 1483.7062581678051
+  events_played: 27
+  game_win_rate: 46.42857142857143
+  match_win_rate: 45.45454545454545
   matches_lost_against:
     Alexander Johansson: 1
     David Lövefors: 1
     Julio Sestelo Chafino: 1
     Marcus Linder: 1
+    Pontus Sandberg: 1
+    Robin Mossberg: 1
   matches_won_against:
+    Alexander Johansson: 1
     Carl Ringdahl: 1
     Karl Soderlund: 1
     Philip Olausson: 1
+    Shizheng Lin: 1
+  modernligan_points: '60'
+  undefeated_records: 0
+Maxim Meyler:
+  dates_played:
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 2
+      games_won: 7
+      losses: 1
+      wins: 3
+  draw_counter: 0
+  elo_rating: 1526.5810788637677
+  events_played: 5
+  game_win_rate: 77.77777777777779
+  match_win_rate: 75.0
+  matches_lost_against:
+    Joshua Petsonk: 1
+  matches_won_against:
+    Andreas Cermak: 1
+    Charlie Wanthatham: 1
+    Jerry Lasota: 1
+  modernligan_points: '46'
   undefeated_records: 0
 Mikael Hedström:
   dates_played:
@@ -533,6 +788,7 @@ Mikael Hedström:
       wins: 2
   draw_counter: 0
   elo_rating: 1499.8490138910124
+  events_played: 13
   game_win_rate: 60.0
   match_win_rate: 50.0
   matches_lost_against:
@@ -541,6 +797,7 @@ Mikael Hedström:
   matches_won_against:
     Jesper Stålbrandt: 1
     Pontus Sandberg: 1
+  modernligan_points: '30'
   undefeated_records: 0
 Odin Mamo Haraldson:
   dates_played:
@@ -551,16 +808,28 @@ Odin Mamo Haraldson:
       games_won: 5
       losses: 2
       wins: 2
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 2
+      losses: 3
+      wins: 0
   draw_counter: 0
-  elo_rating: 1499.2693107201817
-  game_win_rate: 55.55555555555556
-  match_win_rate: 50.0
+  elo_rating: 1449.6354367243357
+  events_played: 22
+  game_win_rate: 41.17647058823529
+  match_win_rate: 28.57142857142857
   matches_lost_against:
+    Alexander Johansson: 1
+    Charlie Wanthatham: 1
     Johan Tegerup: 1
+    Joshua Petsonk: 1
     Marcus Linder: 1
   matches_won_against:
     Elis Holmström: 1
     Pontus Sandberg: 1
+  modernligan_points: '48'
   undefeated_records: 0
 Philip Olausson:
   dates_played:
@@ -580,6 +849,7 @@ Philip Olausson:
       wins: 1
   draw_counter: 0
   elo_rating: 1441.8703053381896
+  events_played: 10
   game_win_rate: 33.33333333333333
   match_win_rate: 25.0
   matches_lost_against:
@@ -592,6 +862,7 @@ Philip Olausson:
   matches_won_against:
     Markus Himmelstrand: 1
     Shizheng Lin: 1
+  modernligan_points: '6'
   undefeated_records: 0
 Pontus Sandberg:
   dates_played:
@@ -609,11 +880,20 @@ Pontus Sandberg:
       games_won: 3
       losses: 3
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 5
+      games_won: 7
+      losses: 1
+      wins: 3
   draw_counter: 0
-  elo_rating: 1428.903593983396
-  game_win_rate: 29.411764705882355
-  match_win_rate: 14.285714285714285
+  elo_rating: 1469.3470613535019
+  events_played: 9
+  game_win_rate: 41.37931034482759
+  match_win_rate: 36.36363636363637
   matches_lost_against:
+    Alexiz Karlsson: 1
     Andreas Cermak: 1
     Karl Soderlund: 1
     Mikael Hedström: 1
@@ -622,6 +902,10 @@ Pontus Sandberg:
     Will Wadbrant: 1
   matches_won_against:
     Charlie Wanthatham: 1
+    Felix Johansson: 1
+    Mathias Lyngarth: 1
+    Shizheng Lin: 1
+  modernligan_points: '39'
   undefeated_records: 0
 Rasmus Bardh:
   dates_played:
@@ -632,16 +916,29 @@ Rasmus Bardh:
       games_won: 8
       losses: 0
       wins: 4
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 4
+      games_won: 7
+      losses: 1
+      wins: 3
   draw_counter: 0
-  elo_rating: 1561.0931282162007
-  game_win_rate: 88.88888888888889
-  match_win_rate: 100.0
-  matches_lost_against: {}
+  elo_rating: 1587.7911308150303
+  events_played: 43
+  game_win_rate: 75.0
+  match_win_rate: 87.5
+  matches_lost_against:
+    Marcus Linder: 1
   matches_won_against:
     Andreas Cermak: 1
+    David Lövefors: 1
+    Filippo Allegri: 1
     Jesper Stålbrandt: 1
     Robin Mossberg: 1
+    Vidar Hesselman: 1
     Will Wadbrant: 1
+  modernligan_points: '76'
   undefeated_records: 1
 Rasmus Enegren:
   dates_played:
@@ -654,6 +951,7 @@ Rasmus Enegren:
       wins: 3
   draw_counter: 0
   elo_rating: 1529.8909054959174
+  events_played: 42
   game_win_rate: 66.66666666666666
   match_win_rate: 75.0
   matches_lost_against:
@@ -662,6 +960,7 @@ Rasmus Enegren:
     Charlie Wanthatham: 1
     Kim Hildeqvist: 1
     Pontus Sandberg: 1
+  modernligan_points: '66'
   undefeated_records: 0
 Robin Mossberg:
   dates_played:
@@ -679,20 +978,55 @@ Robin Mossberg:
       games_won: 3
       losses: 3
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 3
+      games_won: 6
+      losses: 1
+      wins: 3
   draw_counter: 0
-  elo_rating: 1467.0052492123878
-  game_win_rate: 42.857142857142854
-  match_win_rate: 37.5
+  elo_rating: 1506.4619675506583
+  events_played: 43
+  game_win_rate: 50.0
+  match_win_rate: 50.0
   matches_lost_against:
     Carl Ringdahl: 1
     Felix Johansson: 1
     Jesper Stålbrandt: 1
     Kim Hildeqvist: 1
+    Marcus Linder: 1
     Rasmus Bardh: 1
   matches_won_against:
     Charlie Wanthatham: 1
     Jerry Lasota: 1
+    Julian Petsonk: 1
+    Mathias Lyngarth: 1
+    Robin Svensk: 1
     Will Wadbrant: 1
+  modernligan_points: '18'
+  undefeated_records: 0
+Robin Svensk:
+  dates_played:
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 4
+      losses: 2
+      wins: 2
+  draw_counter: 0
+  elo_rating: 1499.7810690005049
+  events_played: 40
+  game_win_rate: 40.0
+  match_win_rate: 50.0
+  matches_lost_against:
+    Markus Himmelstrand: 1
+    Robin Mossberg: 1
+  matches_won_against:
+    Andreas Cermak: 1
+    Julio Sestelo Chafino: 1
+  modernligan_points: '6'
   undefeated_records: 0
 Shizheng Lin:
   dates_played:
@@ -703,15 +1037,28 @@ Shizheng Lin:
       games_won: 3
       losses: 2
       wins: 1
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 5
+      losses: 3
+      wins: 1
   draw_counter: 0
-  elo_rating: 1480.7661472969291
-  game_win_rate: 42.857142857142854
-  match_win_rate: 33.33333333333333
+  elo_rating: 1446.4775370765535
+  events_played: 21
+  game_win_rate: 44.44444444444444
+  match_win_rate: 28.57142857142857
   matches_lost_against:
     Ivar Sandblom: 1
+    Jerry Lasota: 1
+    Mathias Lyngarth: 1
     Philip Olausson: 1
+    Pontus Sandberg: 1
   matches_won_against:
     Charlie Wanthatham: 1
+    Julian Petsonk: 1
+  modernligan_points: '34'
   undefeated_records: 0
 Tiantong Li:
   dates_played:
@@ -724,6 +1071,7 @@ Tiantong Li:
       wins: 2
   draw_counter: 0
   elo_rating: 1500.9845206727457
+  events_played: 41
   game_win_rate: 44.44444444444444
   match_win_rate: 50.0
   matches_lost_against:
@@ -732,6 +1080,29 @@ Tiantong Li:
   matches_won_against:
     Ludvig Cederblad: 1
     Will Wadbrant: 1
+  modernligan_points: '25'
+  undefeated_records: 0
+Timmy Alvelöv:
+  dates_played:
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 6
+      games_won: 4
+      losses: 2
+      wins: 2
+  draw_counter: 0
+  elo_rating: 1507.1942704812263
+  events_played: 12
+  game_win_rate: 40.0
+  match_win_rate: 50.0
+  matches_lost_against:
+    Marcus Linder: 1
+    Markus Himmelstrand: 1
+  matches_won_against:
+    Julio Sestelo Chafino: 1
+    Vidar Hesselman: 1
+  modernligan_points: '12'
   undefeated_records: 0
 Vidar Hesselman:
   dates_played:
@@ -742,15 +1113,28 @@ Vidar Hesselman:
       games_won: 6
       losses: 0
       wins: 3
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 4
+      games_won: 6
+      losses: 2
+      wins: 2
   draw_counter: 0
-  elo_rating: 1548.3713440532874
-  game_win_rate: 85.71428571428571
-  match_win_rate: 100.0
-  matches_lost_against: {}
+  elo_rating: 1542.3624363562767
+  events_played: 6
+  game_win_rate: 70.58823529411765
+  match_win_rate: 71.42857142857143
+  matches_lost_against:
+    Rasmus Bardh: 1
+    Timmy Alvelöv: 1
   matches_won_against:
+    Alexiz Karlsson: 1
+    Elis Holmström: 1
     Ivar Sandblom: 1
     Jesper Stålbrandt: 1
     Tiantong Li: 1
+  modernligan_points: '21'
   undefeated_records: 1
 Will Wadbrant:
   dates_played:
@@ -768,18 +1152,31 @@ Will Wadbrant:
       games_won: 6
       losses: 1
       wins: 3
+    '240325':
+      byes: 0
+      draws: 0
+      games_lost: 5
+      games_won: 6
+      losses: 1
+      wins: 3
   draw_counter: 0
-  elo_rating: 1530.4122166966492
-  game_win_rate: 50.0
-  match_win_rate: 62.5
+  elo_rating: 1559.7708501979344
+  events_played: 52
+  game_win_rate: 51.515151515151516
+  match_win_rate: 66.66666666666666
   matches_lost_against:
+    Marcus Linder: 1
     Rasmus Bardh: 1
     Robin Mossberg: 1
     Tiantong Li: 1
   matches_won_against:
+    Alexander Johansson: 1
+    Alexiz Karlsson: 1
     Andreas Cermak: 1
+    Felix Johansson: 1
     Jerry Lasota: 1
     Mikael Hedström: 1
     Philip Olausson: 1
     Pontus Sandberg: 1
+  modernligan_points: '69'
   undefeated_records: 0
