@@ -5,6 +5,14 @@ from pathlib import Path
 import yaml
 import quopri
 
+#todo
+#add trueraiting support
+#save events data and only parse and calculate with the new files if they are not already parsed
+#add cron job to check for new files once an hour or so
+#improve error handeling
+#add database support?
+#
+
 list_of_forbidden_chars = ['🔥']
 yaml.Dumper.ignore_aliases = lambda *args : True
 
@@ -382,6 +390,7 @@ def sort_dict_list(dict_list, reverse=False):
 
 player_data_dict, date_list, all_dates = read_data()
 events_data_dict = import_events(date_list)
+#add function to save events_data_dict herer so you don't have to parse all the files again.
 calculate_elo_in_data(events_data_dict)
 calculate_win_rate(player_data_dict)
 elo_leader_board, undefeated_leaderboard, draw_leaderboard, most_played_events_leaderboard, modern_ligan_leaderboard, bye_leaderboard, match_win_percentage_leaderboard, game_win_percentage_leaderboard = calculate_leaderboards(player_data_dict)
