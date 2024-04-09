@@ -1,20 +1,177 @@
+import math
+import yaml
 import email
 from bs4 import BeautifulSoup
-import os
 from pathlib import Path
-import yaml
 import quopri
+import pprint
+import os
 
-#todo
-#add trueraiting support
-#save events data and only parse and calculate with the new files if they are not already parsed
-#add cron job to check for new files once an hour or so
-#improve error handeling
-#add database support?
-#
 
 list_of_forbidden_chars = ['🔥']
 yaml.Dumper.ignore_aliases = lambda *args : True
+
+class leaderboards(object):
+    def __init__(self):
+        self.elo_leaderboard = {}
+        self.glicko_leaderboard = {}
+        self.modern_ligan_leaderboard = {}
+        self.total_matches_leaderboard = {}
+        self.total_events_leaderboard = {}
+        self.total_draws_leaderboard = {}
+        self.event_completed_percentage_leaderboard = {}
+        self.game_win_rate_leaderboard = {}
+        self.match_win_rate_leaderboard = {}
+        self.undefeated_records_leaderboard = {}
+        self.undefeated_records_percentage_leaderboard = {}
+        self.bye_leaderboard = {}
+    def add_player(self, player):
+        self.elo_leaderboard[player] = 0
+        self.glicko_leaderboard[player] = 0
+        self.modern_ligan_leaderboard[player] = 0
+        self.total_matches_leaderboard[player] = 0
+        self.total_events_leaderboard[player] = 0
+        self.total_draws_leaderboard[player] = 0
+        self.event_completed_percentage_leaderboard[player] = 0
+        self.game_win_rate_leaderboard[player] = 0
+        self.match_win_rate_leaderboard[player] = 0
+        self.undefeated_records_leaderboard[player] = 0
+        self.undefeated_records_percentage_leaderboard[player] = 0
+    def update_player(self, player, elo_rating, glicko_rating, modern_ligan_rating, undefeated_records, total_matches_played, total_events_played, total_draws, event_completed_percentage, game_win_rate, match_win_rate, total_byes):
+        self.elo_leaderboard[player] = elo_rating
+        self.glicko_leaderboard[player] = glicko_rating
+        self.modern_ligan_leaderboard[player] = modern_ligan_rating
+        self.total_matches_leaderboard[player] = total_matches_played
+        self.total_events_leaderboard[player] = total_events_played
+        self.total_draws_leaderboard[player] = total_draws
+        self.event_completed_percentage_leaderboard[player] = event_completed_percentage
+        self.game_win_rate_leaderboard[player] = game_win_rate
+        self.match_win_rate_leaderboard[player] = match_win_rate
+        self.undefeated_records_leaderboard[player] = undefeated_records
+        self.undefeated_records_percentage_leaderboard[player] = (undefeated_records / total_events_played) * 100
+        self.bye_leaderboard[player] = total_byes
+
+class Player(object):
+    def __init__(self):
+        self.name = ''
+        self.dates_played = {}
+        self.draw_counter = 0
+        self.elo_rating = 1500
+        self.game_win_rate = 0.0
+        self.glicko_rating = 1500
+        self.glicko_rd = 350
+        self.glicko_vol = 0.06
+        self.match_win_rate = 0.0
+        self.matches_lost_against = {}
+        self.matches_won_against = {}
+        self.undefeated_records = 0
+        self.modern_ligan_rating = 0
+        self.modern_ligan_dates_played = {}
+        self.modern_ligan_results = []
+        self.total_games_played = 0
+        self.total_games_won = 0
+        self.total_games_lost = 0
+        self.total_matches_played = 0
+        self.total_matches_won = 0
+        self.total_matches_lost = 0
+        self.total_byes = 0
+        self.event_completed_percentage = 0.0
+        self.undefeated_records_percentage = 0.0
+        self.drop_rate = 0.0
+    def add_date(self, event_date=''):
+        if event_date not in self.dates_played:
+            self.dates_played[event_date] = {'won': 0, 'lost': 0, 'drawn': 0, 'played_percentage': 0, 'byes': 0, 'games_won': 0, 'games_lost': 0, 'games_played': 0}
+
+    def add_match(self, event_date='', won=0, lost=0, drawn=0, games_won=0, games_lost=0, byes=0):
+        self.dates_played[event_date]['played_percentage'] += 0.25
+        self.dates_played[event_date]['games_played'] += games_won + games_lost
+        self.dates_played[event_date]['games_won'] += games_won
+        self.dates_played[event_date]['games_lost'] += games_lost
+        self.dates_played[event_date]['byes'] += byes
+        self.dates_played[event_date]['won'] += won
+        self.dates_played[event_date]['lost'] += lost
+        self.dates_played[event_date]['drawn'] += drawn
+
+
+    def calculate_new_elo(self, player_rating, opponent_rating, outcome):
+        self.elo_rating = calculate_elo_rating(player_rating, opponent_rating, outcome)
+    def calculate_new_glicko(self, player1, player2, outcome):
+        self.glicko_rating, self.glicko_rd, self.glicko_vol = glicko_update(player1.glicko_rating, player1.glicko_rd, player1.glicko_vol, player2.glicko_rating, player2.glicko_rd, outcome)
+    def calculate_points(self):
+        for event_date in self.dates_played.keys():
+            self.total_games_played += self.dates_played.get(event_date)['games_played']
+            self.total_games_won += self.dates_played.get(event_date)['games_won']
+            self.total_games_lost += self.dates_played.get(event_date)['games_lost']
+            self.total_matches_played += self.dates_played.get(event_date).get('won') + self.dates_played.get(event_date).get('drawn') + self.dates_played.get(event_date).get('lost')
+            self.draw_counter += self.dates_played.get(event_date).get('drawn')
+            self.total_matches_won += self.dates_played.get(event_date)['won']
+            self.total_matches_lost += self.dates_played.get(event_date)['lost']
+            self.total_byes += self.dates_played.get(event_date)['byes']
+            if event_date in self.modern_ligan_dates_played:
+                self.modern_ligan_results.append(self.modern_ligan_dates_played.get(event_date).get('won', 0) * 3 + self.modern_ligan_dates_played.get(event_date).get('drawn', 0) * 1)
+        self.match_win_rate = self.total_matches_won / self.total_matches_played * 100
+        self.game_win_rate = self.total_games_won / self.total_games_played * 100
+        self.total_events_played = len(self.dates_played)
+        self.modern_ligan_rating = sum(sorted(self.modern_ligan_results, reverse=True)[:8])
+        self.event_completed_percentage = (self.total_matches_played / (self.total_events_played * 4)) * 100
+        self.undefeated_records_percentage = self.undefeated_records / self.total_events_played * 100
+        self.drop_rate = 1 - (((self.total_matches_won + self.total_matches_lost + self.draw_counter + self.total_byes) / 4)/len(self.dates_played))
+
+def glicko_update(player_rating, player_rd, player_volatility, opponent_rating, opponent_rd, outcome):
+    INITIAL_RATING = 1500
+    INITIAL_RD = 100
+    INITIAL_VOLATILITY = 0.03
+    TAU = 1.0
+    EPSILON = 0.000001
+    def g(rating, rd, volatility):
+        return 1 / (math.sqrt(1 + 3 * (volatility ** 2) * (rd ** 2) / (math.pi ** 2)))
+    def E(player_rating, opponent_rating, opponent_rd):
+        return 1 / (1 + math.exp(-g(opponent_rating, opponent_rd, INITIAL_VOLATILITY) * (player_rating - opponent_rating)))
+
+    def calculate_new_rd(rd, volatility, phi, v_squared, delta_squared):
+        a = math.log(volatility ** 2)
+        def f(x):
+            return (math.exp(x) * (delta_squared - phi ** 2 - v_squared - math.exp(x))) / (2 * (phi ** 2 + v_squared + math.exp(x)) ** 2) - (x - a) / (TAU ** 2)
+        A = a
+        if delta_squared > phi ** 2 + v_squared:
+            B = math.log(delta_squared - phi ** 2 - v_squared)
+        else:
+            k = 1
+            while f(a - k * math.sqrt(TAU ** 2)) < 0:
+                k += 1
+            B = a - k * math.sqrt(TAU ** 2)
+        f_A = f(A)
+        f_B = f(B)
+        while abs(B - A) > EPSILON:
+            C = A + (A - B) * f_A / (f_B - f_A)
+            f_C = f(C)
+            if f_C * f_B < 0:
+                A = B
+                f_A = f_B
+            else:
+                f_A = f_A / 2
+            B = C
+            f_B = f_C
+        return math.exp(A / 2)
+
+    # Step 1: Convert rating and RD to Glicko-2 scale
+    phi = g(player_rating, player_rd, player_volatility)
+    
+    # Step 2: Compute the estimated variance of the player's rating based only on game outcomes
+    v_squared = 1 / (g(opponent_rating, opponent_rd, INITIAL_VOLATILITY) ** 2)
+    delta = phi ** 2 * v_squared * g(player_rating, player_rd, player_volatility) * (outcome - E(player_rating, opponent_rating, opponent_rd))
+    v_squared_inv = 1 / (phi ** 2 + v_squared)
+    delta_squared = delta ** 2
+    
+    # Step 3: Determine new volatility
+    new_volatility = calculate_new_rd(player_rd, player_volatility, phi, v_squared, delta_squared)
+    
+    # Step 4: Update rating and RD
+    new_phi = math.sqrt(phi ** 2 + new_volatility ** 2)
+    new_rd = 1 / math.sqrt(v_squared_inv + (1 / new_phi ** 2))
+    new_rating = player_rating + (new_rd ** 2) * v_squared_inv * (outcome - E(player_rating, opponent_rating, opponent_rd))
+    
+    return new_rating, new_rd, new_volatility
 
 def import_scores_round(html_file_name):
     """
@@ -55,6 +212,18 @@ def import_scores_round(html_file_name):
                                 pair['player_one'] = pair['player_one'].replace('  ', ' ')
                                 pair['player_two'] = pair['player_two'].replace(character, '')
                                 pair['player_two'] = pair['player_two'].replace('  ', ' ')
+                            if pair['player_one'] == 'f h':
+                                pair['player_one'] = 'Felix Johansson'
+                            if pair['player_two'] == 'f h':
+                                pair['player_two'] = 'Felix Johansson'
+                            if pair['player_one'].endswith(' '):
+                                pair['player_one'] = pair['player_one'][:-1]
+                            if pair['player_two'].endswith(' '):
+                                pair['player_two'] = pair['player_two'][:-1]
+                            if pair['player_one'].startswith(' '):
+                                pair['player_one'] = pair['player_one'][1:]
+                            if pair['player_two'].startswith(' '):
+                                pair['player_two'] = pair['player_two'][1:]
                             match_up_list.append(pair)
                     for match in matches:
                         score1 = int(match.find_all("div", class_="box-score")[0].text.strip())
@@ -90,6 +259,24 @@ def import_scores_round(html_file_name):
     else:
         raise Exception('Error, unknown file type!, only .mhtml and .html files are supported')
     return match_up_list
+
+def calculate_elo_rating(player_rating, opponent_rating, outcome):
+    """
+    Calculate the new Elo rating for a player based on the outcome of a match
+
+    :param player_rating: Elo rating of the player
+    :param opponent_rating: Elo rating of the opponent
+    :param outcome: The outcome of the match (1 for win, 0 for loss)
+    :return: The new Elo rating for the player
+    """
+    # Calculate the expected score based on player and opponent ratings
+    expected_score = 1 / (1 + 10 ** ((opponent_rating - player_rating) / 400))
+    
+    # Calculate the new rating based on the outcome and the expected score
+    # The K-factor (32 in this case) determines how much the rating changes after each match
+    new_rating = player_rating + 32 * (outcome - expected_score)
+    
+    return new_rating
 
 def import_events(list_of_dates):
     """
@@ -128,279 +315,148 @@ def import_events(list_of_dates):
     # Return the events dictionary
     return events_dict
 
-def read_data():
-    """
-    Reads player and date data from YAML files.
-
-    :return: Tuple of player data and date list.
-    :rtype: tuple
-    """
-    print("Reading data from YAML files...")
-    try:
-        with open('data.yaml', encoding='utf-8') as data_file, open('dates.yaml', encoding='utf-8') as dates_file:
-            player_data = yaml.safe_load(data_file) or {}
-            date_data = yaml.safe_load(dates_file) or []
-            print("Data read from YAML files successfully.")
-    except FileNotFoundError:
-        print("Error: File 'data.yaml' or 'dates.yaml' not found!")
-        raise FileNotFoundError("File 'data.yaml' or 'dates.yaml' not found!")
-    except yaml.YAMLError as e:
-        print(f"Error parsing YAML: {e}")
-        raise yaml.YAMLError("Error parsing YAML:", e)
-    print("Processing player data...")
-    player_data = {player[key]: value for player in player_data.get('players', []) for key, value in player.items()} if 'players' in player_data else {}
-    print("Processing date list...")
-    all_date_list = date_data.get('dates')
-    date_list = [date for date in date_data.get('dates') if date not in (date_data.get('parsed_dates') or [])]
-    print("Data processing completed.")
-    print(f"Player data: {player_data}")
-    print(f"List of dates to parse: {date_list}")
-    print(f"Already Parsed dates: {date_data.get('parsed_dates')}")
-    return player_data, date_list, all_date_list
-
-def write_data(data, leaderboards, dates, all_dates):
-    """
-    Writes player and date data to YAML files.
-
-    :param data: Dictionary of player data.
-    :type data: dict
-    :param dates: List of dates.
-    :type dates: list
-    """
-    if data is None:
-        raise ValueError("data cannot be None")
-    if dates is None:
-        raise ValueError("parsed_dates cannot be None")
-    if all_dates is None:
-        raise ValueError("dates cannot be None")
-    parsed_dates = {'dates': all_dates, 'parsed_dates': all_dates}
-    if len(dates) > 0:
-        with open('data.yaml', 'w', encoding='utf-8') as data_file:
-            yaml.dump(data, data_file, encoding='utf-8', allow_unicode=True)
-        with open('dates.yaml', 'w', encoding='utf-8') as dates_file:
-            yaml.dump(parsed_dates, dates_file, encoding='utf-8', allow_unicode=True)
-        with open('leaderboards.yaml', 'w', encoding='utf-8') as leaderboards_file:
-            yaml.dump(leaderboards, leaderboards_file, encoding='utf-8', allow_unicode=True)
-    else:
-        pass
-
-
-def calculate_elo_rating(player_rating, opponent_rating, outcome):
-    """
-    Calculate the new Elo rating for a player based on the outcome of a match
-
-    :param player_rating: Elo rating of the player
-    :param opponent_rating: Elo rating of the opponent
-    :param outcome: The outcome of the match (1 for win, 0 for loss)
-    :return: The new Elo rating for the player
-    """
-    expected_score = 1 / (1 + 10 ** ((opponent_rating - player_rating) / 400))
-    new_rating = player_rating + 32 * (outcome - expected_score)
-    return new_rating
-
-def keys_exists(element, *keys):
-    '''
-    Check if *keys (nested) exists in `element` (dict).
-    '''
-    if not isinstance(element, dict):
-        raise AttributeError('keys_exists() expects dict as first argument.')
-    if len(keys) == 0:
-        raise AttributeError('keys_exists() expects at least two arguments, one given.')
-
-    _element = element
-    for key in keys:
-        try:
-            _element = _element[key]
-        except KeyError:
-            return False
-    return True
-
-def calculate_elo_in_data(events_data_dict):
+def calculate_stats_in_data(events_data_dict, players_dict):
     for date, rounds in events_data_dict.items():
         round_number = 0
         for round in rounds:
             round_number = round_number + 1
             for match in round:
-                # Initialize ratings if not present
-                if match.get('player_one').title() not in player_data_dict:
-                    player_data_dict[match.get('player_one').title()] = {'elo_rating': 1500, 'draw_counter': 0, 'matches_won_against':{}, 'matches_lost_against':{}, 'dates_played':{date:{'wins': 0, 'losses': 0, 'draws': 0, 'byes': 0, 'games_won': 0, 'games_lost': 0}}, 'undefeated_records': 0, 'game_win_rate': 0, 'match_win_rate': 0}
-                if match.get('player_two').title() not in player_data_dict:
-                    player_data_dict[match.get('player_two').title()] = {'elo_rating': 1500, 'draw_counter': 0, 'matches_won_against':{}, 'matches_lost_against':{}, 'dates_played':{date:{'wins': 0, 'losses': 0, 'draws': 0, 'byes': 0, 'games_won': 0, 'games_lost': 0}}, 'undefeated_records': 0, 'game_win_rate': 0, 'match_win_rate': 0}
-                if not keys_exists(player_data_dict[match.get('player_one').title()].get('dates_played'), date):
-                    player_data_dict[match.get('player_one').title()]['dates_played'][date] = {'wins': 0, 'losses': 0, 'draws': 0, 'byes': 0, 'games_won': 0, 'games_lost': 0}
-                if not keys_exists(player_data_dict[match.get('player_two').title()].get('dates_played'), date):
-                    player_data_dict[match.get('player_two').title()]['dates_played'][date] = {'wins': 0, 'losses': 0, 'draws': 0, 'byes': 0, 'games_won': 0, 'games_lost': 0}
-                # Update ratings based on match outcome
-                if match.get('player_one_games_won') == 2 or match.get('player_one_games_won') == '2':
-                    player_data_dict[match.get('player_one').title()]['elo_rating'] = calculate_elo_rating(
-                        float(player_data_dict[match.get('player_one').title()]['elo_rating']),
-                        float(player_data_dict[match.get('player_two').title()]['elo_rating']),
-                        1
-                    )
-                    player_data_dict[match.get('player_two').title()]['elo_rating'] = calculate_elo_rating(
-                        float(player_data_dict[match.get('player_two').title()]['elo_rating']),
-                        float(player_data_dict[match.get('player_one').title()]['elo_rating']),
-                        0
-                    )
-                    if player_data_dict[match.get('player_one').title()].get('matches_won_against').get(match.get('player_two').title()):
-                        player_data_dict[match.get('player_one').title()]['matches_won_against'][match.get('player_two').title()] += 1
-                    else: 
-                        player_data_dict[match.get('player_one').title()]['matches_won_against'][match.get('player_two').title()] = 1
-                    if player_data_dict[match.get('player_two').title()].get('matches_lost_against').get(match.get('player_one').title()):
-                        player_data_dict[match.get('player_two').title()]['matches_lost_against'][match.get('player_one').title()] += 1
-                    else: 
-                        player_data_dict[match.get('player_two').title()]['matches_lost_against'][match.get('player_one').title()] = 1
-                    player_data_dict[match.get('player_one').title()]['dates_played'][date]['wins'] += 1
-                    player_data_dict[match.get('player_two').title()]['dates_played'][date]['losses'] += 1                                                                    
-                elif match.get('player_two_games_won') == 2 or match.get('player_two_games_won') == '2':
-                    player_data_dict[match.get('player_one').title()]['elo_rating'] = calculate_elo_rating(
-                        float(player_data_dict[match.get('player_one').title()]['elo_rating']),
-                        float(player_data_dict[match.get('player_two').title()]['elo_rating']),
-                        0
-                    )
-                    player_data_dict[match.get('player_two').title()]['elo_rating'] = calculate_elo_rating(
-                        float(player_data_dict[match.get('player_two').title()]['elo_rating']),
-                        float(player_data_dict[match.get('player_one').title()]['elo_rating']),
-                        1
-                    )
-                    if player_data_dict[match.get('player_one').title()].get('matches_lost_against').get(match.get('player_two').title()):
-                        player_data_dict[match.get('player_one').title()]['matches_lost_against'][match.get('player_two').title()] += 1
-                    else: 
-                        player_data_dict[match.get('player_one').title()]['matches_lost_against'][match.get('player_two').title()] = 1
-                    if player_data_dict[match.get('player_two').title()].get('matches_won_against').get(match.get('player_one').title()):
-                        player_data_dict[match.get('player_two').title()]['matches_won_against'][match.get('player_one').title()] += 1
-                    else: 
-                        player_data_dict[match.get('player_two').title()]['matches_won_against'][match.get('player_one').title()] = 1
-                    player_data_dict[match.get('player_one').title()]['dates_played'][date]['losses'] += 1
-                    player_data_dict[match.get('player_two').title()]['dates_played'][date]['wins'] += 1
-
+                player1 = match.get('player_one').title()
+                player2 = match.get('player_two').title()
+                if player1 not in players_dict:
+                    players_dict[player1] = Player()
+                    players_dict[player1].name = player1
+                if player2 not in players_dict:
+                    players_dict[player2] = Player()
+                    players_dict[player2].name = player2
+                if date not in players_dict[player1].__dict__['dates_played']:
+                    players_dict[player1].add_date(date)
+                if date not in players_dict[player2].__dict__['dates_played']:
+                    players_dict[player2].add_date(date)
+                if match.get('player_one_games_won') > match.get('player_two_games_won'):
+                    players_dict[player1].calculate_new_elo(players_dict[player1].elo_rating, players_dict[player2].elo_rating, 1)
+                    players_dict[player2].calculate_new_elo(players_dict[player2].elo_rating, players_dict[player1].elo_rating, 0)
+                    players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 1)
+                    players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 0)
+                    players_dict[player1].add_match(date, 1, 0, 0, match.get('player_one_games_won'), match.get('player_two_games_won'), byes=0 )
+                    players_dict[player2].add_match(date, 0, 1, 0, match.get('player_two_games_won'), match.get('player_one_games_won'), byes=0 )
+                    players_dict[player1].matches_won_against[players_dict[player2].name] = players_dict[player1].matches_won_against.get(players_dict[player2].name, 0) + 1
+                    players_dict[player2].matches_lost_against[players_dict[player1].name] = players_dict[player2].matches_lost_against.get(players_dict[player1].name, 0) + 1
+                elif match.get('player_one_games_won') < match.get('player_two_games_won'):
+                    players_dict[player1].calculate_new_elo(players_dict[player1].elo_rating, players_dict[player2].elo_rating, 0)
+                    players_dict[player2].calculate_new_elo(players_dict[player2].elo_rating, players_dict[player1].elo_rating, 1)
+                    players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 0)
+                    players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 1)
+                    players_dict[player1].add_match(date, 0, 1, 0, match.get('player_one_games_won'), match.get('player_two_games_won'), byes=0 )
+                    players_dict[player2].add_match(date, 1, 0, 0, match.get('player_two_games_won'), match.get('player_one_games_won'), byes=0 )
+                    players_dict[player1].matches_lost_against[players_dict[player2].name] = players_dict[player1].matches_lost_against.get(players_dict[player2].name, 0) + 1
+                    players_dict[player2].matches_won_against[players_dict[player1].name] = players_dict[player2].matches_won_against.get(players_dict[player1].name, 0) + 1
+                elif match.get('player_one_games_won') == match.get('player_two_games_won'):
+                    players_dict[player1].calculate_new_elo(players_dict[player1].elo_rating, players_dict[player2].elo_rating, 0.5)
+                    players_dict[player2].calculate_new_elo(players_dict[player2].elo_rating, players_dict[player1].elo_rating, 0.5)
+                    players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 0.5)
+                    players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 0.5)
+                    players_dict[player1].add_match(date, 0, 0, 1, match.get('player_one_games_won'), match.get('player_two_games_won'), byes=0 )
+                    players_dict[player2].add_match(date, 0, 0, 1, match.get('player_two_games_won'), match.get('player_one_games_won'), byes=0 )
                 else:
-                    player_data_dict[match.get('player_one').title()]['elo_rating'] = calculate_elo_rating(
-                        float(player_data_dict[match.get('player_one').title()]['elo_rating']),
-                        float(player_data_dict[match.get('player_two').title()]['elo_rating']),
-                        0.5
-                    )
-                    player_data_dict[match.get('player_two').title()]['elo_rating'] = calculate_elo_rating(
-                        float(player_data_dict[match.get('player_two').title()]['elo_rating']),
-                        float(player_data_dict[match.get('player_one').title()]['elo_rating']),
-                        0.5
-                    )
-                    if player_data_dict[match.get('player_one').title()].get('draw_counter'):
-                        player_data_dict[match.get('player_one').title()]['draw_counter'] += 1
-                    else:
-                        player_data_dict[match.get('player_one').title()]['draw_counter'] = 1
-                    if player_data_dict[match.get('player_two').title()].get('draw_counter'):
-                        player_data_dict[match.get('player_two').title()]['draw_counter'] += 1
-                    else:
-                        player_data_dict[match.get('player_two').title()]['draw_counter'] = 1
-                    player_data_dict[match.get('player_one').title()]['dates_played'][date]['draws'] += 1
-                    player_data_dict[match.get('player_two').title()]['dates_played'][date]['draws'] += 1
+                    raise Exception('Error, unknown match result!')
                 if round_number == 4:
-                    if player_data_dict[match.get('player_one').title()].get('dates_played').get(date).get('losses') == 0 and player_data_dict[match.get('player_one').title()].get('dates_played').get(date).get('draws') == 0:
-                        player_data_dict[match.get('player_one').title()]['undefeated_records'] += 1
-                    if player_data_dict[match.get('player_two').title()].get('dates_played').get(date).get('losses') == 0 and player_data_dict[match.get('player_two').title()].get('dates_played').get(date).get('draws') == 0:
-                        player_data_dict[match.get('player_two').title()]['undefeated_records'] += 1
-                    if player_data_dict[match.get('player_one').title()].get('dates_played').get(date).get('wins') + player_data_dict[match.get('player_one').title()].get('dates_played').get(date).get('losses') + player_data_dict[match.get('player_one').title()].get('dates_played').get(date).get('draws') != 4:
-                        player_data_dict[match.get('player_one').title()]['dates_played'][date]['byes'] += 1
-                    if player_data_dict[match.get('player_two').title()].get('dates_played').get(date).get('wins') + player_data_dict[match.get('player_two').title()].get('dates_played').get(date).get('losses') + player_data_dict[match.get('player_one').title()].get('dates_played').get(date).get('draws') != 4:
-                        player_data_dict[match.get('player_two').title()]['dates_played'][date]['byes'] += 1
-                player_data_dict[match.get('player_one').title()]['dates_played'][date]['games_won'] += int(match.get('player_one_games_won'))
-                player_data_dict[match.get('player_two').title()]['dates_played'][date]['games_won'] += int(match.get('player_two_games_won'))
-                player_data_dict[match.get('player_one').title()]['dates_played'][date]['games_lost'] += int(match.get('player_two_games_won'))
-                player_data_dict[match.get('player_two').title()]['dates_played'][date]['games_lost'] += int(match.get('player_one_games_won'))
+                    if players_dict[player1].dates_played[date]['won'] + players_dict[player1].dates_played[date]['lost'] + players_dict[player1].dates_played[date]['drawn'] != 4:
+                        players_dict[player1].dates_played[date]['byes'] = 1
+                    if players_dict[player2].dates_played[date]['won'] + players_dict[player2].dates_played[date]['lost'] + players_dict[player2].dates_played[date]['drawn'] != 4:
+                        players_dict[player2].dates_played[date]['byes'] = 1
+                    if players_dict[player1].dates_played[date]['won'] == 4:
+                        players_dict[player1].undefeated_records += 1
+                    if players_dict[player2].dates_played[date]['won'] == 4:
+                        players_dict[player2].undefeated_records += 1
 
-def calculate_win_rate(player_data_dict):
-    for player, values in player_data_dict.items():
-        games_won = 0
-        games_lost = 0
-        matches_won = 0
-        matches_lost = 0
-        for event in values.get('dates_played').values():
-            games_won += event.get('games_won')
-            games_lost += event.get('games_lost')
-            matches_won += event.get('wins')
-            matches_lost += event.get('losses')
-        if games_won + games_lost != 0:
-            player_data_dict[player]['game_win_rate'] = (games_won / (games_won + games_lost)) * 100
-        if matches_won + matches_lost != 0:
-            player_data_dict[player]['match_win_rate'] = (matches_won / (matches_won + matches_lost)) * 100
+                if date >= modern_ligan_start and date <= modern_ligan_end:
+                    players_dict[player1].modern_ligan_dates_played[date] = players_dict[player1].dates_played[date]
+                    players_dict[player2].modern_ligan_dates_played[date] = players_dict[player2].dates_played[date]
+    calculate_leaderboard_points(players_dict)
+    return None
 
-def calculate_leaderboards(player_data_dict):
-    def modern_ligan_points(list_of_events):
-        points_list = []
-        for event in list_of_events:
-            points = event.get('wins') * 3 + event.get('draws') * 1 + event.get('byes') * 3
-            points_list.append(points)
-        points_list = sorted(points_list, reverse=True)
-        if len(points_list) > 8:
-            points_list = points_list[:8]
-        standings_value = sum(points_list)
-        return standings_value
-    def count_byes(list_of_events):
-        byes = 0
-        for event in list_of_events:
-            byes += event.get('byes')
-        return byes
+def calculate_leaderboard_points(players_dict):
+    for player in players_dict:
+        players_dict[player].calculate_points()
+        leaderboards.add_player(player)
+        leaderboards.update_player(player, elo_rating = players_dict[player].elo_rating, glicko_rating = players_dict[player].glicko_rating, modern_ligan_rating=players_dict[player].modern_ligan_rating, undefeated_records=players_dict[player].undefeated_records, total_matches_played=players_dict[player].total_matches_played,total_events_played= players_dict[player].total_events_played, total_draws=players_dict[player].draw_counter, event_completed_percentage=players_dict[player].event_completed_percentage, game_win_rate=players_dict[player].game_win_rate, match_win_rate=players_dict[player].match_win_rate, total_byes=players_dict[player].total_byes)
+        
+    return None
 
-    elo_leaderboard = []
-    undefeated_leaderboard = []
-    draw_leaderboard = []
-    most_played_events_leaderboard = []
-    modern_ligan_leaderboard = []
-    bye_leaderboard = []
-    match_win_percentage_leaderboard = []
-    game_win_percentage_leaderboard = []
-    for player, values in player_data_dict.items():
+def write_data_to_yaml():
+    leaderboards_yaml_dict = {"Bye Leaderboard": [], "Draw Leaderboard": [], "Elo Leaderboard": [], "Game Win Percentage Leaderboard": [], "Match Win Percentage Leaderboard": [], "Modern Ligan Leaderboard": [], "Most Played Events Leaderboard": [], "Undefeated Leaderboard": [], "Completed Events Leaderboard": [], "Glicko Rating Leaderboard": [], "Most Played Matches Leaderboard": [], "Drop Rate Leaderboard": []}
+    players_yaml_dict = {}
+    for player, player_obj in players_dict.items():
+        leaderboards_yaml_dict['Bye Leaderboard'].append({player: player_obj.total_byes})
+        leaderboards_yaml_dict['Draw Leaderboard'].append({player: player_obj.draw_counter})
+        leaderboards_yaml_dict['Elo Leaderboard'].append({player: player_obj.elo_rating})
+        leaderboards_yaml_dict['Game Win Percentage Leaderboard'].append({player: player_obj.game_win_rate})
+        leaderboards_yaml_dict['Match Win Percentage Leaderboard'].append({player: player_obj.match_win_rate})
+        leaderboards_yaml_dict['Modern Ligan Leaderboard'].append({player: player_obj.modern_ligan_rating})
+        leaderboards_yaml_dict['Most Played Events Leaderboard'].append({player: player_obj.total_events_played})
+        leaderboards_yaml_dict['Undefeated Leaderboard'].append({player: player_obj.undefeated_records})
+        leaderboards_yaml_dict['Completed Events Leaderboard'].append({player: player_obj.event_completed_percentage})
+        leaderboards_yaml_dict['Glicko Rating Leaderboard'].append({player: player_obj.glicko_rating})
+        leaderboards_yaml_dict['Most Played Matches Leaderboard'].append({player: player_obj.total_matches_played})
+        leaderboards_yaml_dict['Drop Rate Leaderboard'].append({player: player_obj.drop_rate})
+        players_yaml_dict[player] = player_obj.__dict__
+    leaderboards_yaml_dict['Bye Leaderboard'] = sorted(leaderboards_yaml_dict['Bye Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Draw Leaderboard'] = sorted(leaderboards_yaml_dict['Draw Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Elo Leaderboard'] = sorted(leaderboards_yaml_dict['Elo Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Game Win Percentage Leaderboard'] = sorted(leaderboards_yaml_dict['Game Win Percentage Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Match Win Percentage Leaderboard'] = sorted(leaderboards_yaml_dict['Match Win Percentage Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Modern Ligan Leaderboard'] = sorted(leaderboards_yaml_dict['Modern Ligan Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Most Played Events Leaderboard'] = sorted(leaderboards_yaml_dict['Most Played Events Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Undefeated Leaderboard'] = sorted(leaderboards_yaml_dict['Undefeated Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Completed Events Leaderboard'] = sorted(leaderboards_yaml_dict['Completed Events Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Glicko Rating Leaderboard'] = sorted(leaderboards_yaml_dict['Glicko Rating Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Most Played Matches Leaderboard'] = sorted(leaderboards_yaml_dict['Most Played Matches Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Drop Rate Leaderboard'] = sorted(leaderboards_yaml_dict['Drop Rate Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    with open('players.yaml', 'w') as outfile:
+        yaml.dump(players_yaml_dict, outfile, default_flow_style=False, allow_unicode=True, encoding='utf-8')
+    with open('leaderboards.yaml', 'w') as outfile:
+        yaml.dump(leaderboards_yaml_dict, outfile, default_flow_style=False, allow_unicode=True, encoding='utf-8')
+    return None
 
-        elo_leaderboard.append({player:values.get('elo_rating')})
-        undefeated_leaderboard.append({player:values.get('undefeated_records')})
-        draw_leaderboard.append({player:values.get('draw_counter') })
-        most_played_events_leaderboard.append({player:len(values.get('dates_played'))})
-        modern_ligan_leaderboard.append({player:modern_ligan_points(list(values.get('dates_played').values()))})
-        bye_leaderboard.append({player:count_byes(list(values.get('dates_played').values()))})
-        match_win_percentage_leaderboard.append({player:values.get('match_win_rate')})
-        game_win_percentage_leaderboard.append({player:values.get('game_win_rate')})
-
-    elo_leaderboard = sort_dict_list(elo_leaderboard, reverse=True)[:8]
-    undefeated_leaderboard = sort_dict_list(undefeated_leaderboard, reverse=True)[:5]
-    draw_leaderboard = sort_dict_list(draw_leaderboard, reverse=True)[:5]
-    most_played_events_leaderboard = sort_dict_list(most_played_events_leaderboard, reverse=True)[:5]
-    modern_ligan_leaderboard = sort_dict_list(modern_ligan_leaderboard, reverse=True)[:20]
-    bye_leaderboard = sort_dict_list(bye_leaderboard, reverse=True)[:5]
-    match_win_percentage_leaderboard = sort_dict_list(match_win_percentage_leaderboard, reverse=True)[:5]
-    game_win_percentage_leaderboard = sort_dict_list(game_win_percentage_leaderboard, reverse=True)[:5]
-    return elo_leaderboard, undefeated_leaderboard, draw_leaderboard, most_played_events_leaderboard, modern_ligan_leaderboard, bye_leaderboard, match_win_percentage_leaderboard, game_win_percentage_leaderboard
-
-def sort_dict_list(dict_list, reverse=False):
-    """
-    Sorts a list of dictionaries based on the values of the first key-value pair.
-
-    Args:
-        dict_list (List[Dict]): A list of dictionaries to be sorted.
-
-    Returns:
-        List[Dict]: The sorted list of dictionaries.
-    """
-    # Sorts the list of dictionaries based on the values of the first key-value pair
-    # using the lambda function as the sorting key.
-    sorted_list = sorted(dict_list, key=lambda x: list(x.values())[0], reverse=reverse)
+def import_event_files():
+    list_of_dates = [folder for folder in os.listdir('datafiles') if os.path.isdir(os.path.join('datafiles', folder))]
+    events_dict = {}
     
-    return sorted_list
+    # Loop through each date in the list
+    for dates in list_of_dates:
+        # Initialize a list to store the event data for each date
+        event_data = []
+        
+        # Get the folder path for the date
+        folder_path = Path("datafiles/" + dates)
+        
+        # Loop through each file in the folder
+        for file_path in folder_path.iterdir():
+            # Check if the file is a regular file
+            if file_path.is_file():
+                # Import the scores for a round
+                round_data = import_scores_round(file_path)
+                
+                # Add the round data to the event data list
+                event_data.append(round_data)
+        
+        # Add the event data to the events dictionary, using the date as the key
+        events_dict[dates] = event_data
+    
+    # Return the events dictionary
+    return events_dict
 
 
-player_data_dict, date_list, all_dates = read_data()
-events_data_dict = import_events(date_list)
-#add function to save events_data_dict herer so you don't have to parse all the files again.
-calculate_elo_in_data(events_data_dict)
-calculate_win_rate(player_data_dict)
-elo_leader_board, undefeated_leaderboard, draw_leaderboard, most_played_events_leaderboard, modern_ligan_leaderboard, bye_leaderboard, match_win_percentage_leaderboard, game_win_percentage_leaderboard = calculate_leaderboards(player_data_dict)
-leaderboards_dict = {}
-leaderboards_dict['Elo Leaderboard'] = elo_leader_board
-leaderboards_dict['Undefeated Leaderboard'] = undefeated_leaderboard
-leaderboards_dict['Draw Leaderboard'] = draw_leaderboard
-leaderboards_dict['Most Played Events Leaderboard'] = most_played_events_leaderboard
-leaderboards_dict['Modern Ligan Leaderboard'] = modern_ligan_leaderboard
-leaderboards_dict['Bye Leaderboard'] = bye_leaderboard
-leaderboards_dict['Match Win Percentage Leaderboard'] = match_win_percentage_leaderboard
-leaderboards_dict['Game Win Percentage Leaderboard'] = game_win_percentage_leaderboard
-write_data(player_data_dict, leaderboards_dict, date_list, all_dates)
+#dates = ['240311', '240318', '240325', '240408']
+modern_ligan_start = '240311'
+modern_ligan_end = '240408'
+
+events = import_event_files()
+
+
+players_dict = {}
+leaderboards = leaderboards()
+calculate_stats_in_data(events, players_dict)
+write_data_to_yaml()
+
