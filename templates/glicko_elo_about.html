@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="display-4" style="padding-top: 10px; padding-bottom: 10px"> Elo </h1>
+
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px">The Elo rating system, devised by Arpad Elo, is one of the most widely used methods for calculating the relative skill levels of players in two-player games. Originally developed for chess, it has since been adapted for various other competitive activities, including eSports, sports, and board games. The Elo system operates on the principle that the outcome of a match can be predicted based on the difference in ratings between two players. After each match, the ratings of the players involved are adjusted based on the actual outcome compared to the expected outcome.</p>
+
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px">If you want to know more about Elo, you can read about it on <a href="https://en.wikipedia.org/wiki/Elo_rating_system">wikipedia.org</a> or on  <a href="https://www.chess.com/terms/elo-rating-chess">chess.com</a></p>
+
+    <h1 class="display-4" style="padding-top: 10px; padding-bottom: 10px"> Glicko2 </h1>
+    
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px"> Glicko2 is an enhancement of the original Glicko rating system developed by Mark Glickman. It addresses some of the limitations of the Elo system by introducing concepts such as rating deviation and rating volatility. These additions provide a more nuanced understanding of player skill, particularly in scenarios where players may not compete frequently or where there are significant variations in player performance over time. The Glicko2 system is designed to be more dynamic and responsive, allowing for more accurate ratings even in situations with sparse data.</p>
+
+    <p class="lead" style="padding-top: 10px; padding-bottom: 10px">You can find more information about Glicko on Wikipedia: <a href="https://en.wikipedia.org/wiki/Glicko_rating_system">wikipedia.org</a> or on <a href="http://glicko.net/glicko.html">glicko.net</a></p>
+    
+        <p><a href="{{ url_for('index') }}">Go back</a></p>
+{% endblock %}

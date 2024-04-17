@@ -12,6 +12,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4 class="text-center text-muted">Elo Rating: {{ '%0.2f' % player_info.get('elo_rating') | float }}</h4 class="text-center text-muted">
+                                <h4 class="text-center text-muted">Glicko Rating: {{ '%0.2f' % player_info.get('glicko_rating').get('mu') | float }}</h4 class="text-center text-muted">
+                                <h4 class="text-center text-muted">Glicko Distribution: {{ '%0.2f' % player_info.get('glicko_rating').get('phi') | float }}</h4 class="text-center text-muted">
+                                <h4 class="text-center text-muted">Glicko Volatility: {{ '%0.2f' % player_info.get('glicko_rating').get('sigma') | float }}</h4 class="text-center text-muted">    
                                 <h4 class="text-center text-muted">Amount of Draws: {{ player_info.get('draw_counter') }}</h4 class="text-center text-muted">
                                 <h4 class="text-center text-muted">Game Win Rate: {{ '%0.2f' % player_info.get('game_win_rate') | float }}%</h4 class="text-center text-muted">
                                 <h4 class="text-center text-muted">Match Win Rate: {{ '%0.2f' % player_info.get('match_win_rate') | float }}%</h4 class="text-center text-muted">
