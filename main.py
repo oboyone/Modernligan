@@ -6,9 +6,9 @@ from pathlib import Path
 import quopri
 import pprint
 import os
+from glicko2 import Glicko2, WIN, LOSS, DRAW, Glicko_Rating, MU, PHI, SIGMA, TAU
 
-
-list_of_forbidden_chars = ['🔥']
+list_of_forbidden_chars = []
 yaml.Dumper.ignore_aliases = lambda *args : True
 
 class leaderboards(object):
@@ -52,15 +52,16 @@ class leaderboards(object):
         self.bye_leaderboard[player] = total_byes
 
 class Player(object):
-    def __init__(self):
+    def __init__(self, glicko_rating=None):
         self.name = ''
         self.dates_played = {}
         self.draw_counter = 0
         self.elo_rating = 1500
         self.game_win_rate = 0.0
-        self.glicko_rating = 1500
-        self.glicko_rd = 350
-        self.glicko_vol = 0.06
+        self.glicko_rating = glicko_rating if glicko_rating else Glicko2().create_rating()
+#        self.glicko_rating = 1500
+#        self.glicko_rd = 350
+#        self.glicko_vol = 0.06
         self.match_win_rate = 0.0
         self.matches_lost_against = {}
         self.matches_won_against = {}
@@ -95,8 +96,12 @@ class Player(object):
 
     def calculate_new_elo(self, player_rating, opponent_rating, outcome):
         self.elo_rating = calculate_elo_rating(player_rating, opponent_rating, outcome)
-    def calculate_new_glicko(self, player1, player2, outcome):
-        self.glicko_rating, self.glicko_rd, self.glicko_vol = glicko_update(player1.glicko_rating, player1.glicko_rd, player1.glicko_vol, player2.glicko_rating, player2.glicko_rd, outcome)
+    def update_glicko_rating(self, series):
+        glicko = Glicko2()
+        #print(self.glicko_rating.__repr__(self))
+        self.glicko_rating = glicko.rate(self.glicko_rating, series)
+#    def calculate_new_glicko(self, player1, player2, outcome):
+#        self.glicko_rating, self.glicko_rd, self.glicko_vol = glicko_update(player1.glicko_rating, player1.glicko_rd, player1.glicko_vol, player2.glicko_rating, player2.glicko_rd, outcome)
     def calculate_points(self):
         for event_date in self.dates_played.keys():
             self.total_games_played += self.dates_played.get(event_date)['games_played']
@@ -117,7 +122,7 @@ class Player(object):
         self.undefeated_records_percentage = self.undefeated_records / self.total_events_played * 100
         self.drop_rate = 1 - (((self.total_matches_won + self.total_matches_lost + self.draw_counter + self.total_byes) / 4)/len(self.dates_played))
 
-def glicko_update(player_rating, player_rd, player_volatility, opponent_rating, opponent_rd, outcome):
+"""def glicko_update(player_rating, player_rd, player_volatility, opponent_rating, opponent_rd, outcome):
     INITIAL_RATING = 1500
     INITIAL_RD = 100
     INITIAL_VOLATILITY = 0.03
@@ -172,7 +177,7 @@ def glicko_update(player_rating, player_rd, player_volatility, opponent_rating, 
     new_rating = player_rating + (new_rd ** 2) * v_squared_inv * (outcome - E(player_rating, opponent_rating, opponent_rd))
     
     return new_rating, new_rd, new_volatility
-
+"""
 def import_scores_round(html_file_name):
     """
     Given the name of an HTML file, this function reads the file and extracts match-up and score information.
@@ -206,12 +211,16 @@ def import_scores_round(html_file_name):
                     matches = soup.find_all("div", class_="match-result")
                     for i in range(0, len(players), 2):
                         if i + 1 < len(players):
-                            pair = {'player_one': players[i].find_all("span")[0].text.strip(), 'player_two': players[i + 1].find_all("span")[0].text.strip(), }
+                            pair = {'player_one': ' '.join(players[i].find_all("span")[0].text.strip().split()), 'player_two': ' '.join(players[i + 1].find_all("span")[0].text.strip().split()), }
+                            for character in pair['player_one']:
+                                if character.isalpha() == False and character != ' ':
+                                    list_of_forbidden_chars.append(character)
+                            for character in pair['player_two']:
+                                if character.isalpha() == False and character != ' ':
+                                    list_of_forbidden_chars.append(character)
                             for character in list_of_forbidden_chars:
                                 pair['player_one'] = pair['player_one'].replace(character, '')
-                                pair['player_one'] = pair['player_one'].replace('  ', ' ')
                                 pair['player_two'] = pair['player_two'].replace(character, '')
-                                pair['player_two'] = pair['player_two'].replace('  ', ' ')
                             if pair['player_one'] == 'f h':
                                 pair['player_one'] = 'Felix Johansson'
                             if pair['player_two'] == 'f h':
@@ -336,8 +345,10 @@ def calculate_stats_in_data(events_data_dict, players_dict):
                 if match.get('player_one_games_won') > match.get('player_two_games_won'):
                     players_dict[player1].calculate_new_elo(players_dict[player1].elo_rating, players_dict[player2].elo_rating, 1)
                     players_dict[player2].calculate_new_elo(players_dict[player2].elo_rating, players_dict[player1].elo_rating, 0)
-                    players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 1)
-                    players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 0)
+                    players_dict[player1].update_glicko_rating([(WIN, players_dict[player2].glicko_rating)])
+                    players_dict[player2].update_glicko_rating([(LOSS, players_dict[player1].glicko_rating)])
+                    #players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 1)
+                    #players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 0)
                     players_dict[player1].add_match(date, 1, 0, 0, match.get('player_one_games_won'), match.get('player_two_games_won'), byes=0 )
                     players_dict[player2].add_match(date, 0, 1, 0, match.get('player_two_games_won'), match.get('player_one_games_won'), byes=0 )
                     players_dict[player1].matches_won_against[players_dict[player2].name] = players_dict[player1].matches_won_against.get(players_dict[player2].name, 0) + 1
@@ -345,8 +356,10 @@ def calculate_stats_in_data(events_data_dict, players_dict):
                 elif match.get('player_one_games_won') < match.get('player_two_games_won'):
                     players_dict[player1].calculate_new_elo(players_dict[player1].elo_rating, players_dict[player2].elo_rating, 0)
                     players_dict[player2].calculate_new_elo(players_dict[player2].elo_rating, players_dict[player1].elo_rating, 1)
-                    players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 0)
-                    players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 1)
+                    players_dict[player1].update_glicko_rating([(LOSS, players_dict[player2].glicko_rating)])
+                    players_dict[player2].update_glicko_rating([(WIN, players_dict[player1].glicko_rating)])
+                    #players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 0)
+                    #players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 1)
                     players_dict[player1].add_match(date, 0, 1, 0, match.get('player_one_games_won'), match.get('player_two_games_won'), byes=0 )
                     players_dict[player2].add_match(date, 1, 0, 0, match.get('player_two_games_won'), match.get('player_one_games_won'), byes=0 )
                     players_dict[player1].matches_lost_against[players_dict[player2].name] = players_dict[player1].matches_lost_against.get(players_dict[player2].name, 0) + 1
@@ -354,8 +367,10 @@ def calculate_stats_in_data(events_data_dict, players_dict):
                 elif match.get('player_one_games_won') == match.get('player_two_games_won'):
                     players_dict[player1].calculate_new_elo(players_dict[player1].elo_rating, players_dict[player2].elo_rating, 0.5)
                     players_dict[player2].calculate_new_elo(players_dict[player2].elo_rating, players_dict[player1].elo_rating, 0.5)
-                    players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 0.5)
-                    players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 0.5)
+                    players_dict[player1].update_glicko_rating([(DRAW, players_dict[player2].glicko_rating)])
+                    players_dict[player2].update_glicko_rating([(DRAW, players_dict[player1].glicko_rating)])
+                    #players_dict[player1].calculate_new_glicko(players_dict[player1], players_dict[player2], 0.5)
+                    #players_dict[player2].calculate_new_glicko(players_dict[player2], players_dict[player1], 0.5)
                     players_dict[player1].add_match(date, 0, 0, 1, match.get('player_one_games_won'), match.get('player_two_games_won'), byes=0 )
                     players_dict[player2].add_match(date, 0, 0, 1, match.get('player_two_games_won'), match.get('player_one_games_won'), byes=0 )
                 else:
@@ -365,10 +380,13 @@ def calculate_stats_in_data(events_data_dict, players_dict):
                         players_dict[player1].dates_played[date]['byes'] = 1
                     if players_dict[player2].dates_played[date]['won'] + players_dict[player2].dates_played[date]['lost'] + players_dict[player2].dates_played[date]['drawn'] != 4:
                         players_dict[player2].dates_played[date]['byes'] = 1
-                    if players_dict[player1].dates_played[date]['won'] == 4:
+                    if players_dict[player1].dates_played[date]['lost'] == 0 and players_dict[player1].dates_played[date]['drawn'] == 0:
                         players_dict[player1].undefeated_records += 1
-                    if players_dict[player2].dates_played[date]['won'] == 4:
+                    if players_dict[player2].dates_played[date]['lost'] == 0 and players_dict[player2].dates_played[date]['drawn'] == 0:
                         players_dict[player2].undefeated_records += 1
+                    for player, player_obj in players_dict.items():
+                        if date not in player_obj.dates_played:
+                            players_dict[player].update_glicko_rating(series=None)
 
                 if date >= modern_ligan_start and date <= modern_ligan_end:
                     players_dict[player1].modern_ligan_dates_played[date] = players_dict[player1].dates_played[date]
@@ -380,7 +398,7 @@ def calculate_leaderboard_points(players_dict):
     for player in players_dict:
         players_dict[player].calculate_points()
         leaderboards.add_player(player)
-        leaderboards.update_player(player, elo_rating = players_dict[player].elo_rating, glicko_rating = players_dict[player].glicko_rating, modern_ligan_rating=players_dict[player].modern_ligan_rating, undefeated_records=players_dict[player].undefeated_records, total_matches_played=players_dict[player].total_matches_played,total_events_played= players_dict[player].total_events_played, total_draws=players_dict[player].draw_counter, event_completed_percentage=players_dict[player].event_completed_percentage, game_win_rate=players_dict[player].game_win_rate, match_win_rate=players_dict[player].match_win_rate, total_byes=players_dict[player].total_byes)
+        leaderboards.update_player(player, elo_rating = players_dict[player].elo_rating, glicko_rating = players_dict[player].glicko_rating.mu, modern_ligan_rating=players_dict[player].modern_ligan_rating, undefeated_records=players_dict[player].undefeated_records, total_matches_played=players_dict[player].total_matches_played,total_events_played= players_dict[player].total_events_played, total_draws=players_dict[player].draw_counter, event_completed_percentage=players_dict[player].event_completed_percentage, game_win_rate=players_dict[player].game_win_rate, match_win_rate=players_dict[player].match_win_rate, total_byes=players_dict[player].total_byes)
         
     return None
 
@@ -397,16 +415,17 @@ def write_data_to_yaml():
         leaderboards_yaml_dict['Most Played Events Leaderboard'].append({player: player_obj.total_events_played})
         leaderboards_yaml_dict['Undefeated Leaderboard'].append({player: player_obj.undefeated_records})
         leaderboards_yaml_dict['Completed Events Leaderboard'].append({player: player_obj.event_completed_percentage})
-        leaderboards_yaml_dict['Glicko Rating Leaderboard'].append({player: player_obj.glicko_rating})
+        leaderboards_yaml_dict['Glicko Rating Leaderboard'].append({player: player_obj.glicko_rating.mu})
         leaderboards_yaml_dict['Most Played Matches Leaderboard'].append({player: player_obj.total_matches_played})
         leaderboards_yaml_dict['Drop Rate Leaderboard'].append({player: player_obj.drop_rate})
         players_yaml_dict[player] = player_obj.__dict__
+        players_yaml_dict[player]['glicko_rating'] = player_obj.glicko_rating.__dict__
     leaderboards_yaml_dict['Bye Leaderboard'] = sorted(leaderboards_yaml_dict['Bye Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
     leaderboards_yaml_dict['Draw Leaderboard'] = sorted(leaderboards_yaml_dict['Draw Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
     leaderboards_yaml_dict['Elo Leaderboard'] = sorted(leaderboards_yaml_dict['Elo Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
     leaderboards_yaml_dict['Game Win Percentage Leaderboard'] = sorted(leaderboards_yaml_dict['Game Win Percentage Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
     leaderboards_yaml_dict['Match Win Percentage Leaderboard'] = sorted(leaderboards_yaml_dict['Match Win Percentage Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
-    leaderboards_yaml_dict['Modern Ligan Leaderboard'] = sorted(leaderboards_yaml_dict['Modern Ligan Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
+    leaderboards_yaml_dict['Modern Ligan Leaderboard'] = sorted(leaderboards_yaml_dict['Modern Ligan Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)
     leaderboards_yaml_dict['Most Played Events Leaderboard'] = sorted(leaderboards_yaml_dict['Most Played Events Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
     leaderboards_yaml_dict['Undefeated Leaderboard'] = sorted(leaderboards_yaml_dict['Undefeated Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
     leaderboards_yaml_dict['Completed Events Leaderboard'] = sorted(leaderboards_yaml_dict['Completed Events Leaderboard'], key=lambda x: list(x.values())[0], reverse=True)[:8]
